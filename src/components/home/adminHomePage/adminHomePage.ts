@@ -17,10 +17,7 @@ export class AdminHomePage {
     private navParams:NavParams,
     private storage:Storage) {
 
-    this.storage.get('userDetails').then((val) => {
-      var fileData:any = JSON.parse(val);
-      this.userDetails = fileData.userDetails;
-    });
+  
    
   }
   
@@ -28,11 +25,11 @@ export class AdminHomePage {
   addNewUserEmail()
   {
     console.log('Add student');
-    this.navCtrl.push(AddEmailList);
+    //this.navCtrl.push(AddEmailList);
   }
   updateRegisteredUser()
   {
     console.log('View student');
-    this.navCtrl.push(AddAdminAccess);
+    //this.navCtrl.push(AddAdminAccess);
   }
 }

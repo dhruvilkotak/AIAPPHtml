@@ -1,9 +1,9 @@
 import { WordData } from "./wordData";
 
-export class methodInterventionWordData{
+export class MethodInterventionWordData{
     //ir method 
-    wordData:WordData;
-     isKnownWord:boolean;
+    wordData:WordData = new WordData();
+     isKnownWord:boolean = true;
      totalAskedTime:number=0;
      knownTime:number=0;
      //di method

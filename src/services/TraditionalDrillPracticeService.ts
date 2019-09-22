@@ -1,6 +1,6 @@
 import { MethodSession } from "../models/methodIntervetionSession";
 import { WordData } from "../models/wordData";
-import { methodInterventionWordData } from "../models/methodInterventionWordData";
+import { MethodInterventionWordData } from "../models/methodInterventionWordData";
 import { ArrayService } from "./arrayService";
 
 export class TraditionalDrillPracticeService{
@@ -15,7 +15,7 @@ export class TraditionalDrillPracticeService{
         var unknownWordCropList:Array<WordData>=[];
         if(methodSessionObject.sessionWordDataList == null)
             methodSessionObject.sessionWordDataList = [];
-        var methodInetrventionWordDataArray:Array<methodInterventionWordData>=methodSessionObject.sessionWordDataList;
+        var methodInetrventionWordDataArray:Array<MethodInterventionWordData>=methodSessionObject.sessionWordDataList;
         var counter:number=0;
 
         console.log("unknown Array:"+ratio2+"  a:"+unknownWordList.length);
@@ -52,19 +52,19 @@ export class TraditionalDrillPracticeService{
     }
 
 
-    updateWordDataToMethodIntevention(wordDataObject:WordData,methodInetrventionWordDataArray:Array<methodInterventionWordData>,isKnown:boolean)
+    updateWordDataToMethodIntevention(wordDataObject:WordData,methodInetrventionWordDataArray:Array<MethodInterventionWordData>,isKnown:boolean)
     {
-        var methodInterventionWordDataObj:methodInterventionWordData= this.getMethodSessionWordDataObject(wordDataObject, methodInetrventionWordDataArray);
+        var methodInterventionWordDataObj:MethodInterventionWordData= this.getMethodSessionWordDataObject(wordDataObject, methodInetrventionWordDataArray);
         if(methodInterventionWordDataObj==null)
         {
-          methodInterventionWordDataObj=new methodInterventionWordData();
+          methodInterventionWordDataObj=new MethodInterventionWordData();
           methodInterventionWordDataObj.wordData=wordDataObject;
           methodInterventionWordDataObj.isKnownWord=isKnown;
           methodInetrventionWordDataArray.push(methodInterventionWordDataObj);
         }
     }
 
-    getMethodSessionWordDataObject(wordDataObject:WordData,methodInetrventionWordDataArray:Array<methodInterventionWordData>)
+    getMethodSessionWordDataObject(wordDataObject:WordData,methodInetrventionWordDataArray:Array<MethodInterventionWordData>)
     {
       for(let obj of methodInetrventionWordDataArray)
       {

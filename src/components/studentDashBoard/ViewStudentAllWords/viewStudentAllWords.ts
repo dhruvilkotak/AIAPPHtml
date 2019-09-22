@@ -13,55 +13,23 @@ import { KnownUnknownWordData } from '../../../models/knownUnknownWordData';
     templateUrl: 'viewStudentAllWords.html'
 })
 export class ViewStudentAllWords{
-    newLearnedWords:Array<KnownUnknownWordData> = [];
-    unKnownWords:Array<WordData> = [];
-    knwonWords:Array<WordData> = [];
-    learningWords:WordData[][]=[];
-    learningCategory:string[]=[];
-    allData_newLearnedWords:Array<KnownUnknownWordData> = [];
-    allData_unKnownWords:Array<WordData> = [];
-    allData_knwonWords:Array<WordData> = [];
-    allData_learningWords:WordData[][]=[];
+    newLearnedWords:Array<KnownUnknownWordData> = [new KnownUnknownWordData()];
+    unKnownWords:Array<WordData> = [new WordData(), new WordData()];
+    knwonWords:Array<WordData> = [new WordData(), new WordData()];
+    learningWords:WordData[][]=[[new WordData(), new WordData()],[new WordData(), new WordData()]];
+    learningCategory:string[]=["a","dd","Dfd"];
+    allData_newLearnedWords:Array<KnownUnknownWordData> = [new KnownUnknownWordData()];
+    allData_unKnownWords:Array<WordData> = [new WordData(), new WordData()];
+    allData_knwonWords:Array<WordData> = [new WordData(), new WordData()];
+    allData_learningWords:WordData[][]=[[new WordData(), new WordData()],[new WordData(), new WordData()]];
     private studentObject:Student=new Student();
     private searchTerm: string = '';
-    error:String='';
+    error:String='Error Message';
     private wordType:number=0;
     constructor(public navCtrl: NavController,
         private storage:Storage,
         public modalCtrl: ModalController,
         private file:File) {
-
-            this.storage.get('wordType').then((val) => {
-                var fileData:any = JSON.parse(val);
-                this.wordType = fileData.wordType;
-            
-                this.storage.get('studentObject').then((val) => {
-                    var fileData:any = JSON.parse(val);
-                    this.studentObject = fileData.studentObject;
-                    
-                    
-                    this.newLearnedWords=this.studentObject.studentWordDetailsArray[this.wordType].newKnownUnknownArrayList;
-                    this.allData_newLearnedWords=this.studentObject.studentWordDetailsArray[this.wordType].newKnownUnknownArrayList;
-            
-                    this.unKnownWords=this.studentObject.studentWordDetailsArray[this.wordType].unKnownArrayList;
-                    this.allData_unKnownWords=this.studentObject.studentWordDetailsArray[this.wordType].unKnownArrayList;
-            
-                    this.knwonWords=this.studentObject.studentWordDetailsArray[this.wordType].knwonArrayList;
-                    this.allData_knwonWords=this.studentObject.studentWordDetailsArray[this.wordType].knwonArrayList;
-                    this.error="";
-            
-                    for(let methodObj of this.studentObject.studentWordDetailsArray[this.wordType].methodArray)
-                    {
-                        if(methodObj.sessionsArray!=null && methodObj.sessionsArray.length>0)
-                        {
-                            this.learningCategory.push(methodObj.methodName);
-                            this.learningWords.push(methodObj.sessionsArray[methodObj.sessionsArray.length-1].unknownWordList);
-                            this.allData_learningWords.push(methodObj.sessionsArray[methodObj.sessionsArray.length-1].unknownWordList);
-                        }
-                    }
-                
-                });
-            });
     }  
 
     filterItems(){

@@ -1,42 +1,24 @@
 import { Component } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
-import { Student } from "../../../models/student";
 import { Storage } from "@ionic/storage";
+import { NavController, NavParams } from "ionic-angular";
 import { PostTestWordDataRecordList } from "../../../models/postTestWordDataRecordList";
-import { ViewSubPostTestAssessmentRecord } from "../viewSubPostTestAssessmentRecord/viewSubPostTestAssessmentRecord";
+import { Student } from "../../../models/student";
 
 
 @Component({
     selector: 'page-viewPostAssessmentRecordList',
     templateUrl: 'viewPostAssessmentRecordList.html'
-  })
-export class ViewPostAssessmentRecordList{
+})
+export class ViewPostAssessmentRecordList {
 
-    private studentObject:Student = new Student();
-    private postTestWordDataRecordListArray:Array<PostTestWordDataRecordList>=[];
-    private wordType:number = 0;
+    private studentObject: Student = new Student();
+    private postTestWordDataRecordListArray: Array<PostTestWordDataRecordList> = [];
+    private wordType: number = 0;
     constructor(public navCtrl: NavController,
-        private navParams:NavParams,
-        private storage:Storage) {
-
-            
-            this.storage.get('wordType').then((val) => {
-                var fileData:any = JSON.parse(val);
-                this.wordType = fileData.wordType;
-           
-            this.storage.get('studentObject').then((val) => {
-                var fileData:any = JSON.parse(val);
-                this.studentObject = fileData.studentObject;
-                if(this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray!=null)
-                    this.postTestWordDataRecordListArray= this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray;
-            });
-        });
-         
+        private navParams: NavParams,
+        private storage: Storage) {
     }
-    viewPostTestAssessment(index:number)
-    {
-        this.storage.set('testIndex',JSON.stringify({ testIndex: index }) );   
-        this.navCtrl.push(ViewSubPostTestAssessmentRecord);
+    viewPostTestAssessment(index: number) {
     }
 
 }

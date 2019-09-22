@@ -1,14 +1,9 @@
-import { File } from '@ionic-native/file';
-import { WordData } from '../models/wordData';
-import { Student } from '../models/student';
-import { Method } from '../models/methodIntervetion';
-import { Platform } from 'ionic-angular';
-import { SocialSharing } from '@ionic-native/social-sharing';
 import { DocumentPicker } from '@ionic-native/document-picker';
-import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
-import { StudentFireBaseDao } from '../dao/StudentFireBaseDao';
+import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Platform } from 'ionic-angular';
+import { Student } from '../models/student';
 import { StudentData } from '../models/StudentData';
-import { StudentFireBaseService } from '../firebaseServices/studentFireBaseService';
 
 export class StudentServices {
    

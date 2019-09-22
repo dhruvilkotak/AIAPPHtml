@@ -5,7 +5,6 @@ import * as firebase from 'firebase';
 import { Firebase } from "@ionic-native/firebase";
 import { Storage } from "@ionic/storage";
 import { User } from "../../../../models/user";
-import { UserFireBaseService } from "../../../../firebaseServices/userFireBaseService";
 
 @Component({
     selector: 'page-updateProfile',
@@ -14,14 +13,13 @@ import { UserFireBaseService } from "../../../../firebaseServices/userFireBaseSe
 
 export class UpdateProfile{
 
-  private firstname:string="";
-  private lastname:string="";
-  private emailId:string="";
-  private password:string="";
-  private reTypePassword:string="";
+  private firstname:string="firstname1";
+  private lastname:string="lastname1";
+  private emailId:string="xyz@gmail.com";
+  private password:string="123456";
+  private reTypePassword:string="123456";
   private error: String  = "Error Message";
-  private userRole:string="";
-  private userFireBaseService:UserFireBaseService=new UserFireBaseService();
+  private userRole:string= new User().userRole;
   
   private securityQuestion:string="";
   private answer:string="";
@@ -34,24 +32,7 @@ export class UpdateProfile{
         private file:File,
         private navParams:NavParams,
         private storage : Storage) {
-          
-            this.storage.get('userDetails').then((val) => {
-                var fileData:any = JSON.parse(val);
-                this.userDetails = fileData.userDetails;
-
-                this.firstname=this.userDetails.firstname;
-                console.log("first name:"+this.firstname);
-                this.lastname=this.userDetails.lastname;
-                this.emailId=this.userDetails.emailId;
-                this.password=this.userDetails.password;
-                this.reTypePassword=this.userDetails.password;
-                this.userRole=this.userDetails.userRole;
-                this.securityQuestion=this.userDetails.securityQuestion;
-                this.answer=this.userDetails.answer;
-
-
-            });
-             
+            
       }
 
       
@@ -75,10 +56,6 @@ export class UpdateProfile{
         updatedUserDetails.verifyEmail=this.userDetails.verifyEmail;
         updatedUserDetails.userUID=this.userDetails.userUID;
         updatedUserDetails.organizationUID=this.userDetails.organizationUID;
-        
-        this.storage.set('userDetails',JSON.stringify({ userDetails: updatedUserDetails }) );
-        this.userFireBaseService.updateUserDetails(updatedUserDetails)
-        this.error=" user details updated."
       }
     }
 

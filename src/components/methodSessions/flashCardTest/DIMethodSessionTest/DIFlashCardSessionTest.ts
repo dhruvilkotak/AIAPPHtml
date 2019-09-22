@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
 import { File } from '@ionic-native/file';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { Storage } from '@ionic/storage';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { MethodInterventionWordData } from '../../../../models/methodInterventionWordData';
+import { MethodSession } from '../../../../models/methodIntervetionSession';
+import { OrganizationDetails } from '../../../../models/organizationDetails';
 import { Student } from '../../../../models/student';
 import { WordData } from '../../../../models/wordData';
-import { methodInterventionWordData } from '../../../../models/methodInterventionWordData';
-import { MethodSession } from '../../../../models/methodIntervetionSession';
-import { SessionSummary } from '../sessionSummary/sessionSummary';
 import { DirectInstructionServices } from '../../../../services/DirectInstructionSevice';
-import { WordServices } from '../../../../services/wordServices';
-import { StudentFireBaseService } from '../../../../firebaseServices/studentFireBaseService';
-import { PreAssessmentFireBaseService } from '../../../../firebaseServices/PreAssessmentFireBaseService';
-import { TextToSpeech } from '@ionic-native/text-to-speech';
-import { MethodStudentService } from '../../../../firebaseServices/methodStudentService';
-import { OrganizationDetails } from '../../../../models/organizationDetails';
 import { FlashcardService } from '../../../../services/flashcardService';
+import { WordServices } from '../../../../services/wordServices';
 
 @Component({
   selector: 'page-flashcard',
@@ -24,35 +20,34 @@ import { FlashcardService } from '../../../../services/flashcardService';
 
 export class DIFlashCardSessionTest {
   private studentObject: Student = new Student();
-  private methodIndex: number;
-  private studentFireBaseService: StudentFireBaseService ;
+  private methodIndex: number = 0;
 
   private wordDataObject: WordData = new WordData();
-  private wordDataArray: Array<WordData> = [];
-  private sessionCounter: number;
-  private TestTitle: String;
+  private wordDataArray: Array<WordData> = [new WordData()];
+  private sessionCounter: number = 0;
+  private TestTitle: String = "Test Title";
   private currentCardNumber: number = 0;
   private totalCardNumber: number = 0;
   private testIndex: number = 0;
   private testFlag: number = 0; // testType="assessment" :0 ; "IncrementRehrsal" :1
   //private studentObject:Student;
-  private methodInetrventionWordDataArray: Array<methodInterventionWordData>;
-  private methodInterventionWordDataObj: methodInterventionWordData;
-  private methodSessionObject: MethodSession;
+  private methodInetrventionWordDataArray: Array<MethodInterventionWordData> = [new MethodInterventionWordData()];
+  private methodInterventionWordDataObj: MethodInterventionWordData = new MethodInterventionWordData();
+  private methodSessionObject: MethodSession = new MethodSession();
   private DIServiceObject: DirectInstructionServices = new DirectInstructionServices();
   private ratio1: number = 0;
   private ratio2: number = 0;
-  private startDate: Date;
-  private endDate: Date;
+  private startDate: Date = new Date();
+  private endDate: Date = new Date();
   private wordServiceObj: WordServices = new WordServices();
-  private organizationDetails:OrganizationDetails =new OrganizationDetails();
-  private wordType:number = 0;
-  private showAnswer:boolean = false;
+  private organizationDetails: OrganizationDetails = new OrganizationDetails();
+  private wordType: number = 0;
+  private showAnswer: boolean = false;
   private flashcardService: FlashcardService = new FlashcardService();
-  private number1:string="";
-  private number2:string="";
-  private operation:string="";
-  private result=[];   
+  private number1: string = "123";
+  private number2: string = "23";
+  private operation: string = "+";
+  private result = [];
 
   ionViewDidLoad() {
     console.log("onviewdidload");
@@ -64,67 +59,6 @@ export class DIFlashCardSessionTest {
     private viewCtrl: ViewController,
     private storage: Storage,
     private tts: TextToSpeech) {
-
-      this.storage.get('wordType').then((val) => {
-        var fileData:any = JSON.parse(val);
-        this.wordType = fileData.wordType;
-    
-        storage.get('studentObject').then((val) => {
-          var fileData: any = JSON.parse(val);
-          this.studentObject = fileData.studentObject;
-    
-          this.storage.get('organizationDetails').then((val) => {
-            var fileData:any = JSON.parse(val);
-            this.organizationDetails = fileData.organizationDetails;
-          
-            this.studentFireBaseService = new StudentFireBaseService(this.organizationDetails.organizationDetailsUID,this.wordType);
-    
-            storage.get('methodIndex').then((val) => {
-              var fileData: any = JSON.parse(val);
-              this.methodIndex = fileData.methodIndex;
-      
-              storage.get('methodSessionObject').then((val) => {
-                var fileData: any = JSON.parse(val);
-                this.methodSessionObject = fileData.methodSessionObject;
-      
-      
-                this.startDate = new Date();
-                this.ratio1 = this.studentObject.studentWordDetailsArray[this.wordType].methodArray[this.methodIndex].ratio1;
-                this.ratio2 = this.studentObject.studentWordDetailsArray[this.wordType].methodArray[this.methodIndex].ratio2;
-                this.methodInetrventionWordDataArray = this.DIServiceObject.makeSessionList(this.methodSessionObject.knownWordList , this.methodSessionObject.unknownWordList, this.ratio1, this.ratio2);
-                this.sessionCounter = this.methodSessionObject.sessionIndex;
-                this.TestTitle = "Session " + this.sessionCounter;
-                console.log("total otr:");
-                console.log("total otr:"+this.studentObject.studentWordDetailsArray[this.wordType].methodArray[this.methodIndex].totalOppurtunitiesToRespond);
-                if(this.studentObject.studentWordDetailsArray[this.wordType].methodArray[this.methodIndex].totalOppurtunitiesToRespond ==null || this.studentObject.studentWordDetailsArray[this.wordType].methodArray[this.methodIndex].totalOppurtunitiesToRespond==0)
-                {
-                  this.studentObject.studentData[this.wordType].methodArray[this.methodIndex].totalOppurtunitiesToRespond = 120;
-                  // update to firebase too.
-                  var methodStudentService: MethodStudentService = new MethodStudentService(this.organizationDetails.organizationDetailsUID,this.wordType);
-                  methodStudentService.updateMethodOTR(this.studentObject,this.methodIndex);
-                  this.storage.set('studentObject', JSON.stringify({ studentObject: this.studentObject }));
-                }
-                this.methodSessionObject.totalOppurtunitiesToRespond = this.studentObject.studentWordDetailsArray[this.wordType].methodArray[this.methodIndex].totalOppurtunitiesToRespond;
-                this.totalCardNumber = this.methodSessionObject.totalOppurtunitiesToRespond;
-                if (this.totalCardNumber > 0) {
-                  this.currentCardNumber = 1;
-                  this.methodInterventionWordDataObj = this.methodInetrventionWordDataArray[0];
-                  this.wordDataObject = this.methodInterventionWordDataObj.wordData;
-                  this.convertTextToMath(this.wordDataObject.wordText);
-            
-                }
-                else {
-                  this.navCtrl.pop();
-                  //  console.log("size:"+this.wordDataArray.length+" id:"+this.wordDataArray[0].wordId);
-                  //   this.updateAllObjects();
-                }
-      
-              });
-            });
-          });
-        });
-    });
-
 
   }
   greenCircleClick() {
@@ -140,7 +74,7 @@ export class DIFlashCardSessionTest {
       this.methodInterventionWordDataObj = this.methodInetrventionWordDataArray[0];
       this.wordDataObject = this.methodInterventionWordDataObj.wordData;
       this.convertTextToMath(this.wordDataObject.wordText);
-            
+
       this.currentCardNumber++;
     }
     else {
@@ -159,32 +93,19 @@ export class DIFlashCardSessionTest {
       this.methodInterventionWordDataObj = this.methodInetrventionWordDataArray[0];
       this.wordDataObject = this.methodInterventionWordDataObj.wordData;
       this.convertTextToMath(this.wordDataObject.wordText);
-            
+
       this.currentCardNumber++;
     }
     else {
       console.log("else:red");
       this.updateAllObjects();
-    
+
     }
   }
 
-  updateAllObjects(){
-    var methodStudentServiceObj : MethodStudentService = new MethodStudentService(this.organizationDetails.organizationDetailsUID,this.wordType);
-    methodStudentServiceObj.updateAllObjects(this.startDate,this.methodSessionObject,this.methodInetrventionWordDataArray,this.sessionCounter,this.studentObject ,this.methodIndex,this.storage);
-     this.goBackToView();
+  updateAllObjects() {
   }
- goBackToView() {
-    this.storage.set('studentObject', JSON.stringify({ studentObject: this.studentObject }));
-    this.storage.set('methodIndex', JSON.stringify({ methodIndex: this.methodIndex }));
-    this.storage.set('methodSessionObject', JSON.stringify({ methodSessionObject: this.methodSessionObject }));
-    this.storage.set('sessionCounter', JSON.stringify({ sessionCounter: this.sessionCounter }));
-
-    this.navCtrl.push(SessionSummary).then(() => {
-      const startIndex = this.navCtrl.getActive().index - 2;
-      this.navCtrl.remove(startIndex, 2);
-
-    });
+  goBackToView() {
     //this.navCtrl.pop();
   }
 
@@ -197,9 +118,9 @@ export class DIFlashCardSessionTest {
     return null;
   }
 
-  updateMethodSessionWordDataObject(methodInterventionWordDataObj: methodInterventionWordData, KnownThisTime: boolean) {
+  updateMethodSessionWordDataObject(methodInterventionWordDataObj: MethodInterventionWordData, KnownThisTime: boolean) {
 
- //   this.DIServiceObject.printmethodInetrventionWordDataArray(this.methodInetrventionWordDataArray);
+    //   this.DIServiceObject.printmethodInetrventionWordDataArray(this.methodInetrventionWordDataArray);
 
     if (methodInterventionWordDataObj.isKnownWord) {
       this.DIServiceObject.removeObjectFromArray(this.methodInetrventionWordDataArray, 0);
@@ -235,7 +156,7 @@ export class DIFlashCardSessionTest {
         if (!methodInterventionWordDataObj.drillmode) {
           methodInterventionWordDataObj.drillmode = true;
         }
-        
+
         console.log("unKnown item:yes   drill mode making:yes adding 3rd index:");
         methodInterventionWordDataObj.drillmodeKnownCounter = 0;
         this.DIServiceObject.removeObjectFromArray(this.methodInetrventionWordDataArray, 0);

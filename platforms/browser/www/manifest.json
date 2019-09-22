@@ -1,11 +1,13 @@
 {
-  "background_color": "#FFF",
+  "name": "Ionic",
+  "short_name": "Ionic",
+  "start_url": "index.html",
   "display": "standalone",
-  "name": "Flash Intervention",
-  "short_name": "Flash Intervention",
-  "version": "io.ionic.bgsolomon",
-  "description": "An awesome Ionic/Cordova app.",
-  "author": "Ionic Framework Team",
-  "icons": [],
-  "start_url": "index.html"
+  "icons": [{
+    "src": "assets/imgs/logo.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#4e8ef7",
+  "theme_color": "#4e8ef7"
 }

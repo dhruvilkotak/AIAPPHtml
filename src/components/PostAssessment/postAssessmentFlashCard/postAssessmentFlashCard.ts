@@ -26,7 +26,7 @@ export class PostAssessmentFlashCard {
   private wordDataObject: WordData = new WordData();
 
 
-  private wordDataArray: Array<PostTestWordData> = [];
+  private wordDataArray: Array<PostTestWordData> = [new PostTestWordData()];
   private TestTitle: String = "";
   private currentCardNumber: number = 0;
   private totalCardNumber: number = 0;
@@ -40,9 +40,9 @@ export class PostAssessmentFlashCard {
   private wordType: number = 0;
   private showAnswer: boolean = false;
   private flashcardService: FlashcardService = new FlashcardService();
-  private number1: string = "";
-  private number2: string = "";
-  private operation: string = "";
+  private number1: string = "123";
+  private number2: string = "1";
+  private operation: string = "+";
   private result = [];
   ionViewDidLoad() {
     console.log("onviewdidload");
@@ -55,64 +55,7 @@ export class PostAssessmentFlashCard {
     private storage: Storage,
     private tts: TextToSpeech) {
 
-    // this.wordDataObject.wordText = "";
-    // this.postTestWordDataObject.wordData = this.wordDataObject;
-
-
-    this.storage.get('wordType').then((val) => {
-      var fileData: any = JSON.parse(val);
-      this.wordType = fileData.wordType;
-
-      this.storage.get('studentObject').then((val) => {
-        var fileData: any = JSON.parse(val);
-        this.studentObject = fileData.studentObject;
-
-
-        this.storage.get('organizationDetails').then((val) => {
-          var fileData: any = JSON.parse(val);
-          this.organizationDetails = fileData.organizationDetails;
-
-          this.storage.get('testIndex').then((val) => {
-            var fileData: any = JSON.parse(val);
-            this.testIndex = fileData.testIndex;
-
-            storage.get('postTestWordDataArray').then((val) => {
-              var fileData: any = JSON.parse(val);
-              this.wordDataArray = fileData.postTestWordDataArray;
-              console.log("val:" + val);
-              storage.get('subTestIndex').then((val) => {
-                var fileData: any = JSON.parse(val);
-                this.subTestIndex = fileData.subTestIndex;
-
-                console.log("sub test index:" + this.subTestIndex);
-                if (this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray == null)
-                  this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray = [];
-
-                //this.testIndex = this.studentObject.postTestWordDataRecordListArray.length; 
-                this.TestTitle = "Post Test Assessment " + this.testIndex;
-                if (this.testIndex < this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray.length)
-                  this.postTestWordDataRecordListObject = this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray[this.testIndex];
-
-                this.wordDataArray = this.arrayServiceObj.shuffle(this.wordDataArray);
-                this.totalCardNumber = this.wordDataArray.length;
-                if (this.totalCardNumber > 0) {
-                  this.currentCardNumber = 1;
-                  this.postTestWordDataObject = this.wordDataArray[this.currentCardNumber - 1];
-                  this.wordDataObject = this.postTestWordDataObject.wordData;
-                  this.convertTextToMath(this.postTestWordDataObject.wordData.wordText);
-
-                }
-                else {
-                  //this.goBackToView();
-                  this.navCtrl.pop();
-                }
-              });
-            });
-          });
-        });
-      });
-    });
-  }
+   }
 
   greenCircleClick() {
     this.showAnswer = false;

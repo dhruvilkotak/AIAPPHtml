@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
-import { UserFireBaseService } from "../../../../firebaseServices/userFireBaseService";
 import { User } from "../../../../models/user";
 import { OrganizationDetails } from "../../../../models/organizationDetails";
 import { Storage } from "@ionic/storage";
@@ -15,7 +14,6 @@ export class SelectSubscription{
   private amount:string="";
   private userDetails:User;
   private organizationDetails:OrganizationDetails;
-  private userFireBaseService:UserFireBaseService=new UserFireBaseService();
   private couponCode:string="";
   constructor(public navCtrl: NavController,
     private storage : Storage) {

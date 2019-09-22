@@ -5,7 +5,6 @@ import { File } from '@ionic-native/file';
 import { WordServices } from '../../services/wordServices';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { DocumentPicker } from '@ionic-native/document-picker';
-import { WordDataFireBaseService } from '../../firebaseServices/WordDataFireBaseService';
 import { DataSetService } from '../../services/dataSetServices';
 import { Dataset } from '../../models/Dataset';
 import { Storage } from '@ionic/storage';
@@ -17,16 +16,15 @@ import { OrganizationDetails } from '../../models/organizationDetails';
 })
 export class ViewWordList{
   
-    datasetList:Array<Dataset>=[];
-    mathDatasetList:Array<Dataset>=[];
+    datasetList:Array<Dataset>=[new Dataset()];
+    mathDatasetList:Array<Dataset>=[new Dataset()];
   
-    wordDataList:Array<WordData> = [];
-    mathWordDataList:Array<WordData> = [];
-    allData:Array<WordData> = [];
-    mathAllData:Array<WordData> = [];
+    wordDataList:Array<WordData> = [new WordData()];
+    mathWordDataList:Array<WordData> = [new WordData()];
+    allData:Array<WordData> = [new WordData()];
+    mathAllData:Array<WordData> = [new WordData()];
     private searchTerm: string = '';
     wordServiceObject:WordServices=new WordServices();
-    wordDataFireBaseService:WordDataFireBaseService;
     datasetService:DataSetService = new DataSetService();
     error:String='';
     organizationDetails: OrganizationDetails =new OrganizationDetails() ;
@@ -40,38 +38,6 @@ export class ViewWordList{
       private socialSharing:SocialSharing,
       private docPicker: DocumentPicker,
       private storage:Storage) {
-
-        
-      this.storage.get('organizationDetails').then((val) => {
-        var fileData:any = JSON.parse(val);
-        this.organizationDetails = fileData.organizationDetails;
-        this.wordDataFireBaseService = new WordDataFireBaseService(this.organizationDetails.organizationDetailsUID,0);
-
-        this.datasetService.getDataSetList(file,0).then(data=>{
-          this.datasetList=data;
-          for(let datsetObj of this.datasetList)
-          {
-             this.wordDataList= this.wordDataList.concat(datsetObj.wordList);
-          }
-          this.allData = this.wordDataList;
-          console.log("alldata:"+this.allData.length);
-          this.datasetList=null;
-        });
-
-        this.datasetService.getDataSetList(file,1).then(data=>{
-          this.mathDatasetList=data;
-          for(let datsetObj of this.mathDatasetList)
-          {
-             this.mathWordDataList= this.mathWordDataList.concat(datsetObj.wordList);
-          }
-          this.mathAllData = this.mathWordDataList;
-          this.mathDatasetList=null;
-        });
-
-
-      });
-      
-        
     };
 
     filterItems(){
@@ -109,7 +75,6 @@ export class ViewWordList{
             {
               text: 'yes',
               handler: () => {
-                this.wordDataFireBaseService.removeWordData(wordDataObj,this.wordType);
                 this.datasetService.removeWordDataFromFile(wordDataObj,this.file,this.datasetService,this.wordType);
                 if(this.wordType == 0)
                   this.wordServiceObject.removeWordFromArray(this.allData,wordDataObj);
@@ -135,10 +100,6 @@ export class ViewWordList{
 
       importWordsFile(){
        
-        var wordDataFireBaseService:WordDataFireBaseService = new WordDataFireBaseService(this.organizationDetails.organizationDetailsUID,this.wordType);
-        
-        wordDataFireBaseService.importWordDataFile(this.file,this.plt,this.docPicker,this.allData);
-         this.filterItems();
        }
  
       changeWordType(){

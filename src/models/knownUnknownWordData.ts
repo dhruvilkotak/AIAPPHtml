@@ -1,9 +1,9 @@
 import { WordData } from "./wordData";
 
 export class KnownUnknownWordData{
-    wordData:WordData;
+    wordData:WordData = new WordData();
     postAssessmentCounter:number=0;
-    methodIndex:number;
+    methodIndex:number=0;
     methodName:string="";
     wordId:String;
 }

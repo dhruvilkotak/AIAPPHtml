@@ -3,7 +3,7 @@ import { MethodSession } from "../models/methodIntervetionSession";
 import { PreSessionResultTest } from "../models/PreSessionAssessmentResultTest";
 import { MyMap } from "../models/myMap";
 import { MyMApServices } from "./MyMapServices";
-import { methodInterventionWordData } from "../models/methodInterventionWordData";
+import { MethodInterventionWordData } from "../models/methodInterventionWordData";
 
 export class IncrementalRehersalService
 {
@@ -20,7 +20,7 @@ export class IncrementalRehersalService
         var unknownWordList:Array<WordData>=methodSessionObject.unknownWordList;
         if(methodSessionObject.sessionWordDataList == null)
             methodSessionObject.sessionWordDataList = [];
-        var methodInetrventionWordDataArray:Array<methodInterventionWordData>=methodSessionObject.sessionWordDataList;
+        var methodInetrventionWordDataArray:Array<MethodInterventionWordData>=methodSessionObject.sessionWordDataList;
         var testWordArray:Array<WordData>=[];
         var counter:number=0;
         var k:number=0;
@@ -208,7 +208,7 @@ export class IncrementalRehersalService
     }
     
   
-    getMethodSessionWordDataObject(wordDataObject:WordData,methodInetrventionWordDataArray:Array<methodInterventionWordData>)
+    getMethodSessionWordDataObject(wordDataObject:WordData,methodInetrventionWordDataArray:Array<MethodInterventionWordData>)
       {
         for(let obj of methodInetrventionWordDataArray)
         {
@@ -220,12 +220,12 @@ export class IncrementalRehersalService
         return null;
       }
 
-      updateWordDataToMethodIntevention(wordDataObject:WordData,methodInetrventionWordDataArray:Array<methodInterventionWordData>,isKnown:boolean)
+      updateWordDataToMethodIntevention(wordDataObject:WordData,methodInetrventionWordDataArray:Array<MethodInterventionWordData>,isKnown:boolean)
       {
-        var methodInterventionWordDataObj:methodInterventionWordData= this.getMethodSessionWordDataObject(wordDataObject, methodInetrventionWordDataArray);
+        var methodInterventionWordDataObj:MethodInterventionWordData= this.getMethodSessionWordDataObject(wordDataObject, methodInetrventionWordDataArray);
         if(methodInterventionWordDataObj==null)
         {
-          methodInterventionWordDataObj=new methodInterventionWordData();
+          methodInterventionWordDataObj=new MethodInterventionWordData();
           methodInterventionWordDataObj.wordData=wordDataObject;
           methodInterventionWordDataObj.isKnownWord=isKnown;
           methodInetrventionWordDataArray.push(methodInterventionWordDataObj);

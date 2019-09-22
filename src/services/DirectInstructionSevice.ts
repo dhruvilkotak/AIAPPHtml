@@ -1,16 +1,16 @@
 import { WordData } from "../models/wordData";
-import { methodInterventionWordData } from "../models/methodInterventionWordData";
+import { MethodInterventionWordData } from "../models/methodInterventionWordData";
 
 export class DirectInstructionServices{
     
     makeSessionList(knownList:Array<WordData> , unKnownList:Array<WordData>,ratio1:number,ratio2:number)
     {
-        var methodInterventionWordDataList:Array<methodInterventionWordData> = [];
+        var methodInterventionWordDataList:Array<MethodInterventionWordData> = [];
         var i:number=0;
         var j:number=0;
         while(i<ratio1 && j< ratio2)
         {
-            var methodInterventionWordDataObj:methodInterventionWordData= new methodInterventionWordData();
+            var methodInterventionWordDataObj:MethodInterventionWordData= new MethodInterventionWordData();
             methodInterventionWordDataObj.wordData=knownList[i++];
             methodInterventionWordDataObj.isKnownWord=true;
             methodInterventionWordDataList.push(methodInterventionWordDataObj)
@@ -20,7 +20,7 @@ export class DirectInstructionServices{
             // methodInterventionWordDataObj.isKnownWord=true;
             // methodInterventionWordDataList.push(methodInterventionWordDataObj)
             
-            methodInterventionWordDataObj= new methodInterventionWordData();
+            methodInterventionWordDataObj= new MethodInterventionWordData();
             methodInterventionWordDataObj.wordData=unKnownList[j++];
             methodInterventionWordDataObj.isKnownWord=false;
             methodInterventionWordDataList.push(methodInterventionWordDataObj)
@@ -34,7 +34,7 @@ export class DirectInstructionServices{
     }
 
 
-    removeObjectFromArray(methodInetrventionWordDataArray:Array<methodInterventionWordData> , index:number )
+    removeObjectFromArray(methodInetrventionWordDataArray:Array<MethodInterventionWordData> , index:number )
     {
         var remove:boolean=false;
         if (index !== -1) {
@@ -44,7 +44,7 @@ export class DirectInstructionServices{
         } 
         return remove;
     }
-    addObjectToArray(methodInetrventionWordDataArray:Array<methodInterventionWordData> ,methodInterventionWordDataObj:methodInterventionWordData, index:number )
+    addObjectToArray(methodInetrventionWordDataArray:Array<MethodInterventionWordData> ,methodInterventionWordDataObj:MethodInterventionWordData, index:number )
     {
         if(index <= methodInetrventionWordDataArray.length)
         {
@@ -52,7 +52,7 @@ export class DirectInstructionServices{
         }
     }
 
-    printmethodInetrventionWordDataArray(methodInetrventionWordDataArray : Array<methodInterventionWordData> )
+    printmethodInetrventionWordDataArray(methodInetrventionWordDataArray : Array<MethodInterventionWordData> )
     {
         for(let obj of methodInetrventionWordDataArray)
         {

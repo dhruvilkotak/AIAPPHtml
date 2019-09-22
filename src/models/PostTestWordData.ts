@@ -1,8 +1,8 @@
 import { WordData } from "./wordData";
 
 export class PostTestWordData{
-   wordData:WordData;
-   isKnown:Array<boolean>=[];
+   wordData:WordData=new WordData();
+   isKnown:Array<boolean>=[true,false];
    totalKnownWord:number=0;
    
 }

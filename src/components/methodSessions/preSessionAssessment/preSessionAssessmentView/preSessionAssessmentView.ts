@@ -16,14 +16,14 @@ export class PreSessionAssessmentView {
 
   private error: String  = "Error Message";
   private studentObject: Student = new Student();
-  private sessionCounter: number;
-  private methodIndex: number;
-  private preSessionWordDataArray: Array<PreSessionResultTest> = [];
-  private test1Map: MyMap;
-  private test2Map: MyMap;
+  private sessionCounter: number =0;
+  private methodIndex: number =0;
+  private preSessionWordDataArray: Array<PreSessionResultTest> = [new PreSessionResultTest()];
+  private test1Map: MyMap = new MyMap();
+  private test2Map: MyMap = new MyMap;
   private incrementalRehrsalService: IncrementalRehersalService = new IncrementalRehersalService();
-  private methodSessionObject: MethodSession;
-  private remainUnknownWordArray: Array<WordData> = [];
+  private methodSessionObject: MethodSession = new MethodSession();
+  private remainUnknownWordArray: Array<WordData> = [new WordData(),new WordData()];
   private ratio1: number = 0;
   private ratio2: number = 0;
   private wordType: number = 0;
@@ -32,53 +32,9 @@ export class PreSessionAssessmentView {
     public navCtrl: NavController,
     private storage: Storage) {
 
-
-    this.storage.get('wordType').then((val) => {
-      var fileData: any = JSON.parse(val);
-      this.wordType = fileData.wordType;
-
-      storage.get('studentObject').then((val) => {
-        var fileData: any = JSON.parse(val);
-        this.studentObject = fileData.studentObject;
-
-        storage.get('methodIndex').then((val) => {
-          var fileData: any = JSON.parse(val);
-          this.methodIndex = fileData.methodIndex;
-          this.ratio1 = this.studentObject.studentWordDetailsArray[this.wordType].methodArray[this.methodIndex].ratio1;
-          this.ratio2 = this.studentObject.studentWordDetailsArray[this.wordType].methodArray[this.methodIndex].ratio2;
-
-          storage.get('methodSessionObject').then((val) => {
-            var fileData: any = JSON.parse(val);
-            this.methodSessionObject = fileData.methodSessionObject;
-
-            storage.get('sessionCounter').then((val) => {
-              var fileData: any = JSON.parse(val);
-              this.sessionCounter = fileData.sessionCounter;
-
-              if (this.sessionCounter > 0) {
-                console.log("retention:" + this.methodSessionObject.retentionWordList.values);
-                console.log("control:" + this.methodSessionObject.controlItems.values);
-                this.test1Map = this.methodSessionObject.retentionWordList;
-                this.test2Map = this.methodSessionObject.controlItems;
-                this.updatePreSessionResultTest();
-
-              }
-
-              var i: number = 0;
-              // if(this.methodSessionObject.controlItems.keys.length< this.studentObject.methodArray[this.methodIndex].ratio2){
-
-              // }
-              this.remainUnknownWordArray = this.methodSessionObject.unknownWordList;
-            });
-          });
-        });
-      });
-    });
-
   }
 
   updatePreSessionResultTest() {
-    this.preSessionWordDataArray = this.incrementalRehrsalService.compareAssessment(this.test1Map, this.test2Map, this.preSessionWordDataArray);
   
   }
 }

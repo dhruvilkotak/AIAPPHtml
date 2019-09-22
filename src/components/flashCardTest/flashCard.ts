@@ -6,7 +6,6 @@ import { WordServices } from '../../services/wordServices';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ArrayService } from '../../services/arrayService';
-import { PreAssessmentFireBaseService } from '../../firebaseServices/PreAssessmentFireBaseService';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { OrganizationDetails } from '../../models/organizationDetails';
 import { FlashcardService } from '../../services/flashcardService';
@@ -19,22 +18,22 @@ import { FlashcardService } from '../../services/flashcardService';
 
 export class FlashCard {
   private wordDataObject: WordData = new WordData();
-  private wordDataArray: Array<WordData> = [];
-  private TestTitle: String = "";
+  private wordDataArray: Array<WordData> = [new WordData(), new WordData()];
+  private TestTitle: String = "Test Title";
   private currentCardNumber: number = 0;
   private totalCardNumber: number = 0;
   private wordServiceObject: WordServices = new WordServices();
   private studentObject: Student = new Student();
   private testIndex: number = 0;
   private arrayServiceObj: ArrayService = new ArrayService();
-  private studentDataSetRecordIndex: number = -1;
-  private organizationDetails: OrganizationDetails;
+  private studentDataSetRecordIndex: number = 0;
+  private organizationDetails: OrganizationDetails = new OrganizationDetails();
   private wordType: number = 0;
   private showAnswer: boolean = false;
   private flashcardService: FlashcardService = new FlashcardService();
-  private number1: string = "";
-  private number2: string = "";
-  private operation: string = "";
+  private number1: string = "223";
+  private number2: string = "2";
+  private operation: string = "+";
   private result = [];
 
   ionViewDidLoad() {
@@ -48,51 +47,26 @@ export class FlashCard {
     private storage: Storage,
     private tts: TextToSpeech) {
 
-    this.storage.get('wordType').then((val) => {
-      var fileData: any = JSON.parse(val);
-      this.wordType = fileData.wordType;
 
-      this.storage.get('studentObject').then((val) => {
-        var fileData: any = JSON.parse(val);
-        this.studentObject = fileData.studentObject;
+    this.TestTitle = "Assessment Test " + this.testIndex;
 
-        this.storage.get('organizationDetails').then((val) => {
-          var fileData: any = JSON.parse(val);
-          this.organizationDetails = fileData.organizationDetails;
+    console.log("test:" + this.TestTitle + "  index:" + this.studentDataSetRecordIndex);
 
-          this.storage.get('studentDataSetRecordIndex').then((val) => {
-            var fileData: any = JSON.parse(val);
-            this.studentDataSetRecordIndex = fileData.studentDataSetRecordIndex;
+    this.wordDataArray = this.arrayServiceObj.shuffle(this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].datasetObject.wordList);
+    this.totalCardNumber = this.wordDataArray.length;
+    this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].totalWordList = this.wordDataArray.length;
+    console.log("len: " + this.totalCardNumber + "  d:" + this.wordDataArray.length);
 
-            this.storage.get('testIndex').then((val) => {
-              var fileData: any = JSON.parse(val);
-              this.testIndex = fileData.testIndex;
-              this.TestTitle = "Assessment Test " + this.testIndex;
+    if (this.totalCardNumber > 0) {
+      this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].unknownWordList = [];
+      this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].knownWordList = [];
+      this.currentCardNumber = 1;
+      this.wordDataObject = this.wordDataArray[this.currentCardNumber - 1];
+      this.convertTextToMath(this.wordDataObject.wordText);
 
-              console.log("test:" + this.TestTitle + "  index:" + this.studentDataSetRecordIndex);
+    }
 
-              this.wordDataArray = this.arrayServiceObj.shuffle(this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].datasetObject.wordList);
-              this.totalCardNumber = this.wordDataArray.length;
-              this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].totalWordList = this.wordDataArray.length;
-              console.log("len: " + this.totalCardNumber + "  d:" + this.wordDataArray.length);
 
-              if (this.totalCardNumber > 0) {
-                this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].unknownWordList = [];
-                this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].knownWordList = [];
-                this.currentCardNumber = 1;
-                this.wordDataObject = this.wordDataArray[this.currentCardNumber - 1];
-                this.convertTextToMath(this.wordDataObject.wordText);
-
-              }
-              else {
-                this.goBackToView(this.studentObject);
-                this.navCtrl.pop();
-              }
-            });
-          });
-        });
-      });
-    });
   }
   greenCircleClick() {
     this.showAnswer = false;
@@ -147,17 +121,7 @@ export class FlashCard {
     }
   }
   goBackToView(studentObject: Student) {
-    if (Student != null) {
-      var preAssessmentFireBaseService: PreAssessmentFireBaseService = new PreAssessmentFireBaseService(this.organizationDetails.organizationDetailsUID, this.wordType);
-      if (this.testIndex >= 2) {
-        studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].sessionTestDone = true;
-        preAssessmentFireBaseService.updateSessionTestDone(studentObject, this.studentDataSetRecordIndex);
-      }
-      //   this.studentServiceObject.updateStudentToFile(this.file,this.studentObject,this.studentServiceObject);
-      this.storage.set('studentObject', JSON.stringify({ studentObject: this.studentObject }));
-      preAssessmentFireBaseService.addAssessmentToStudent(studentObject, this.testIndex, this.studentDataSetRecordIndex);
-    }
-    this.navCtrl.pop();
+
   }
 
   textToSpeechWordData(text: string) {

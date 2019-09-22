@@ -17,7 +17,7 @@ export class ViewPreSessionUnKnownWord{
         private params:NavParams,
         private viewCtrl:ViewController) {
         
-        this.wordDataObj=params.get('wordDataObject');
+      
         
     }
     dismiss() {
