@@ -18,7 +18,7 @@ export class AddCategoryModal {
     private categoriesList : Array<string> = ["category 1","category 2","category 3"];
     private searchTerm:string="";
     private newCategory:string = "";
-    private error = "";
+    private error: String  = "Error Message";
     private sectedCategoryWordData:string = "";
     private wordType:number = 0;
     constructor(private navCtrl: NavController,

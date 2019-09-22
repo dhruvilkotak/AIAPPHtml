@@ -11,7 +11,7 @@ import { Storage } from "@ionic/storage";
 
 export class ViewSubPostTestAssessmentRecord{
 
-    private error:string="";
+    private error: String  = "Error Message";
     private studentObject:Student=new Student();
     private postTestWordDataRecordListObject:PostTestWordDataRecordList= new PostTestWordDataRecordList();
     private wordType:number = 0;

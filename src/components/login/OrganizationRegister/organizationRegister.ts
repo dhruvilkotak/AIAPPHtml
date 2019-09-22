@@ -21,7 +21,7 @@ export class organizationRegister{
   private emailId:string="";
   private password:string="";
   private reTypePassword:string="";
-  private error:string="";
+  private error: String  = "Error Message";
   private emailVerfied:boolean= false; 
   private securityQuestion:string="";
   private answer:string="";

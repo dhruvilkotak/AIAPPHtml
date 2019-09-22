@@ -13,7 +13,7 @@ import { ViewPostAssessmentList } from "../viewPostAssessmentList/ViewPostAssess
   })
 export class PostAssessmentDashBoard{
 
-    private error:string="";
+    private error: String  = "Error Message";
     private studentObject:Student=new Student();
     private lastPostAssessment:number=-1; 
     private wordType:number = 0;

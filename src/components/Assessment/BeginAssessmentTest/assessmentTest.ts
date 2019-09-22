@@ -21,7 +21,7 @@ export class AssessmentTest
     datasetName:String="";
     numberOfTest:number =0;
     ConsistancyPercentage:Array<number>=[0,0,0];
-    private error:string="";
+    private error: String  = "Error Message";
     constructor(private modalCtrl: ModalController,
         public navCtrl: NavController,
         private navParams:NavParams,

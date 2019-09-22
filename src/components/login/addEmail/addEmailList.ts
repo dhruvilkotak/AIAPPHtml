@@ -17,7 +17,7 @@ export class AddEmailList {
   private userEmailList: Array<string> = [];
   private allData: Array<string> = [];
   private searchTerm: string = '';
-  private error: string = '';
+  private error: String  = "Error Message";
   private userFireBaseService: UserFireBaseService = new UserFireBaseService();
   private userDetails:User = new User();
   private organizationDetails: OrganizationDetails = new OrganizationDetails ();

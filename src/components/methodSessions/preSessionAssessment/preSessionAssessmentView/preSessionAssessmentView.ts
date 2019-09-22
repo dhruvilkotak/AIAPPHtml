@@ -14,7 +14,7 @@ import { Storage } from '@ionic/storage';
 })
 export class PreSessionAssessmentView {
 
-  private error: string = "";
+  private error: String  = "Error Message";
   private studentObject: Student = new Student();
   private sessionCounter: number;
   private methodIndex: number;

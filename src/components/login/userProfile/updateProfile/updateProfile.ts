@@ -19,7 +19,7 @@ export class UpdateProfile{
   private emailId:string="";
   private password:string="";
   private reTypePassword:string="";
-  private error:string="";
+  private error: String  = "Error Message";
   private userRole:string="";
   private userFireBaseService:UserFireBaseService=new UserFireBaseService();
   

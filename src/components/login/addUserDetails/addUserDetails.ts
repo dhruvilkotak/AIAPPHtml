@@ -22,7 +22,7 @@ export class AddUserDetails{
   private emailId:string="";
   private password:string="";
   private reTypePassword:string="";
-  private error:string="";
+  private error: String  = "Error Message";
   private emailVerfied:boolean= false; 
   private userFireBaseService:UserFireBaseService=new UserFireBaseService();
   private securityQuestion:string="";

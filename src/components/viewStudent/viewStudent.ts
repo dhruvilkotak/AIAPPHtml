@@ -25,7 +25,7 @@ export class ViewStudent{
     private  studentServicesObject : StudentServices = new StudentServices();
     private studentFirebaseService:StudentFireBaseService;
     private searchTerm: string = '';
-    private error:string='';
+    private error: String  = "Error Message";
     private userDetails:User = new User();
     organizationDetails : OrganizationDetails = new OrganizationDetails();
     constructor(private navCtrl: NavController ,

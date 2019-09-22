@@ -22,7 +22,7 @@ export class Login {
   public user2: User = new User();
   private emailID: string;
   private password: string;
-  private error: string;
+  private error: String  = "Error Message";
   private fileData: any;
   passwordType: Array<string> = Array(3).fill('password');
   passwordIcon: Array<string> = Array(3).fill('eye-off');

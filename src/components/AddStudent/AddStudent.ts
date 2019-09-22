@@ -17,7 +17,7 @@ export class AddStudent {
   private lastname:string;
   private studentid:string;
   private fileData:any;
-  private error: string;
+  private error: String  = "Error Message";
   private studentDetails:Student;
   private organizationDetails:OrganizationDetails = new OrganizationDetails();
   constructor(public navCtrl: NavController) {

@@ -18,7 +18,7 @@ export class SessionSummary{
       private methodIndex:number;
       private methodName:string="";
       private totalWordsResponded:number;
-      private error:String="";
+      private error: String  = "Error Message";
       private sessionDate:String="";
       private sessionCounter:number;
       private TestTitle:String="";

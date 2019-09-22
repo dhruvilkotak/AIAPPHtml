@@ -29,7 +29,7 @@ export class StudentdashBoard {
     private learningWordsLength:number=0;
     private ratio1=0;
     private ratio2=0;
-    private error="";
+    private error: String  = "Error Message";
     private organizationDetails:OrganizationDetails=new OrganizationDetails();
     private isWord:boolean = true;
     private wordType:number = 0;

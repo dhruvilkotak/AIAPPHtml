@@ -16,7 +16,7 @@ export class AddAdminAccess {
 
   private allDatauserDetailsList: Array<User> = [];
   private searchTerm: string = '';
-  private error: string = '';
+  private error: String  = "Error Message";
   private userFireBaseService: UserFireBaseService = new UserFireBaseService();
   private userDetailsList:Array<User>=[];
   private userDetails:User = new User();

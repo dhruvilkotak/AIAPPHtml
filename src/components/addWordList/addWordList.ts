@@ -31,7 +31,7 @@ export class AddWordList {
         private storage: Storage,
         private modalCtrl: ModalController
     ) {
-        this.fromModal = params.get('fromModal');
+       // this.fromModal = params.get('fromModal');
 
         this.storage.get('organizationDetails').then((val) => {
             var fileData: any = JSON.parse(val);
@@ -51,15 +51,7 @@ export class AddWordList {
                 this.wordData.wordText = this.wordText;
                 this.wordData.wordCategory = this.wordCategory;
 
-                if (!this.fromModal) {
-                    this.dataSetService.addWordDatatoDatSetFile(this.file, this.wordData, new DataSetService(), this.wordType);
-                    this.wordText = "";
-                    this.wordCategory = "Select Category";
-                    this.error = "";
-                }
-                else {
-                    this.dismiss(this.wordData);
-                }
+                 
             }
         } catch (e) {
             this.error = e;

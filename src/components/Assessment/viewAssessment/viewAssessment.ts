@@ -23,7 +23,7 @@ export class ViewAssessmentTest
     private totalUnKnowns:number=0;
     studentObject:Student=new Student();
     intArray:Array<number>=[];
-    private error:String="";
+    private error: String  = "Error Message";
     assessmentTestObjectArray:Array<AssessmentTestData>=[];
     assessmentTestDataObject:AssessmentTestData;
     assessmentWordDataArray:Array<ViewAssessmentWordObjects>=[];

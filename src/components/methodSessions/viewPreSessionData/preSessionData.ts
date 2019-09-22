@@ -24,7 +24,7 @@ export class PreSessionView{
     private methodName:string="";
     private totalSessions:number=0;
     private sessionCounter : number=0;
-    private error:string="";
+    private error: String  = "Error Message";
     private incrementalRehersalServiceObject:IncrementalRehersalService=new IncrementalRehersalService();
     private traditionalDrillPracticeService:TraditionalDrillPracticeService= new TraditionalDrillPracticeService();
     //session details
