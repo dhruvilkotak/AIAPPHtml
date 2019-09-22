@@ -1,0 +1,44 @@
+{
+  "_from": "cordova-plugin-documentpicker@^1.0.0",
+  "_id": "cordova-plugin-documentpicker@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-5QZ+CKEIKcqxd+fIjUcz9IiOco2aCSsZS3/ku1S8llDsoxfvGufEi2iQaFgfrP/IQGBmITPGH+bXLr+No2uFXQ==",
+  "_location": "/cordova-plugin-documentpicker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "cordova-plugin-documentpicker@^1.0.0",
+    "name": "cordova-plugin-documentpicker",
+    "escapedName": "cordova-plugin-documentpicker",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-documentpicker/-/cordova-plugin-documentpicker-1.0.0.tgz",
+  "_shasum": "79d67b9f3d95d0cc5531aba40e8c1250e1b4ddbc",
+  "_spec": "cordova-plugin-documentpicker@^1.0.0",
+  "_where": "C:\\mystuff\\master\\AcademicInvertionAPP\\backup\\htmlDemos\\backup\\1\\AIAPPv4.0",
+  "author": {
+    "name": "Impossible"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "iOS plugin for Cordova writting in Swift.",
+  "keywords": [
+    "cordova",
+    "plugin",
+    "documentpicker"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "cordova-plugin-documentpicker",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

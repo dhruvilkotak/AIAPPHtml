@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Session {{sessionCounter}} Summary</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<div *ngIf="error" class="error-message">{{error}}</div>
+<ion-content padding="'true'" scroll="false" class="has-header">
+  <ion-card>
+
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-col>
+        <button ion-button class="submit-btn" full (click)="continue()">Continue</button>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-col class="ion-title" style="font-weight: bold;"> Student Name: </ion-col>
+      <ion-col>
+        <h3> {{studentObject.studentData.firstName}} {{studentObject.studentData.lastName}} </h3>
+      </ion-col>
+
+      <ion-col class="ion-title" style="font-weight: bold;"> Date : </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="sessionDate"></ion-datetime>
+        </ion-item>
+
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-col class="ion-title" style="font-weight: bold;"> Set : </ion-col>
+      <ion-col>{{studentObject.studentWordDetailsArray[this.wordType].studentWordType}} </ion-col>
+
+      <ion-col class="ion-title" style="font-weight: bold;"> Completion Time : </ion-col>
+      <ion-col> {{completionTime}} ( hh : mm : ss ) </ion-col>
+
+    </ion-row>
+
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-col class="ion-title" style="font-weight: bold;"> Method : </ion-col>
+      <ion-col>
+        <h3> {{methodName}} </h3>
+      </ion-col>
+
+      <ion-col class="ion-title" style="font-weight: bold;"> Total Opportunities to Respond : </ion-col>
+      <ion-col> {{totalWordsResponded}} </ion-col>
+
+    </ion-row>
+
+    <ion-item>
+      <ion-row class="ion-title" style="background-color: silver;">
+        <ion-col>Word Text</ion-col>
+        <ion-col> Is Known Word</ion-col>
+        <ion-col> Correct Time </ion-col>
+        <ion-col> Total Times Asked</ion-col>
+
+      </ion-row>
+      <ion-item *ngFor="let sessionWordObj of sessionWordList">
+        <ion-row>
+          <ion-col>{{sessionWordObj.wordData.wordText}}</ion-col>
+          <ion-col>
+            <ion-item *ngIf="sessionWordObj.isKnownWord">
+              Known Word
+            </ion-item>
+            <ion-item *ngIf="!sessionWordObj.isKnownWord">
+              Unknown Word
+            </ion-item>
+          </ion-col>
+          <ion-col>{{sessionWordObj.knownTime}} </ion-col>
+          <ion-col>{{sessionWordObj.totalAskedTime}} </ion-col>
+
+        </ion-row>
+      </ion-item>
+    </ion-item>
+
+
+  </ion-card>
+
+
+</ion-content>

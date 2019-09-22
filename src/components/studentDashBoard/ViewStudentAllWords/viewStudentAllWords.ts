@@ -1,0 +1,131 @@
+import { Component} from '@angular/core';
+import { NavController,Platform, AlertController, ModalController, NavParams  } from 'ionic-angular';
+import { File } from '@ionic-native/file';
+import { WordData } from '../../../models/wordData';
+import { Student } from '../../../models/student';
+import { Storage } from '@ionic/storage';
+import { AddWordList } from '../../addWordList/addWordList';
+import { WordServices } from '../../../services/wordServices';
+import { KnownUnknownWordData } from '../../../models/knownUnknownWordData';
+
+@Component({
+    selector: 'page-viewStudentAllWords',
+    templateUrl: 'viewStudentAllWords.html'
+})
+export class ViewStudentAllWords{
+    newLearnedWords:Array<KnownUnknownWordData> = [];
+    unKnownWords:Array<WordData> = [];
+    knwonWords:Array<WordData> = [];
+    learningWords:WordData[][]=[];
+    learningCategory:string[]=[];
+    allData_newLearnedWords:Array<KnownUnknownWordData> = [];
+    allData_unKnownWords:Array<WordData> = [];
+    allData_knwonWords:Array<WordData> = [];
+    allData_learningWords:WordData[][]=[];
+    private studentObject:Student=new Student();
+    private searchTerm: string = '';
+    error:String='';
+    private wordType:number=0;
+    constructor(public navCtrl: NavController,
+        private storage:Storage,
+        public modalCtrl: ModalController,
+        private file:File) {
+
+            this.storage.get('wordType').then((val) => {
+                var fileData:any = JSON.parse(val);
+                this.wordType = fileData.wordType;
+            
+                this.storage.get('studentObject').then((val) => {
+                    var fileData:any = JSON.parse(val);
+                    this.studentObject = fileData.studentObject;
+                    
+                    
+                    this.newLearnedWords=this.studentObject.studentWordDetailsArray[this.wordType].newKnownUnknownArrayList;
+                    this.allData_newLearnedWords=this.studentObject.studentWordDetailsArray[this.wordType].newKnownUnknownArrayList;
+            
+                    this.unKnownWords=this.studentObject.studentWordDetailsArray[this.wordType].unKnownArrayList;
+                    this.allData_unKnownWords=this.studentObject.studentWordDetailsArray[this.wordType].unKnownArrayList;
+            
+                    this.knwonWords=this.studentObject.studentWordDetailsArray[this.wordType].knwonArrayList;
+                    this.allData_knwonWords=this.studentObject.studentWordDetailsArray[this.wordType].knwonArrayList;
+                    this.error="";
+            
+                    for(let methodObj of this.studentObject.studentWordDetailsArray[this.wordType].methodArray)
+                    {
+                        if(methodObj.sessionsArray!=null && methodObj.sessionsArray.length>0)
+                        {
+                            this.learningCategory.push(methodObj.methodName);
+                            this.learningWords.push(methodObj.sessionsArray[methodObj.sessionsArray.length-1].unknownWordList);
+                            this.allData_learningWords.push(methodObj.sessionsArray[methodObj.sessionsArray.length-1].unknownWordList);
+                        }
+                    }
+                
+                });
+            });
+    }  
+
+    filterItems(){
+ 
+        this.newLearnedWords = this.allData_newLearnedWords.filter((newKnownUnknownObject) => {
+            return newKnownUnknownObject.wordData.wordText.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 || 
+            newKnownUnknownObject.wordData.wordCategory.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+          });
+          
+        this.unKnownWords = this.allData_unKnownWords.filter((wordObject) => {
+            return wordObject.wordText.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 || 
+            wordObject.wordCategory.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+          });
+          
+        this.knwonWords = this.allData_knwonWords.filter((wordObject) => {
+            return wordObject.wordText.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 || 
+            wordObject.wordCategory.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+          });
+        
+        this.learningWords = this.allData_learningWords.filter((wordArray) => {
+            wordArray.filter((wordObject)=>{
+                return wordObject.wordText.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 || 
+                wordObject.wordCategory.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+            });
+            
+          });
+
+    }
+
+    addUnknownWordToStudent(){
+    //     let profileModal = this.modalCtrl.create(AddWordList, { fromModal: true });
+    //    profileModal.onDidDismiss(wordData => {
+    //      console.log("text:"+wordData.wordText);
+    //      this.addWordToStudentToFile(wordData,this.studentObject);
+    //    });
+    //    profileModal.present();
+    }
+
+    addWordToStudentToFile(wordDataObj:WordData, studentObject:Student){
+        var allData:Array<WordData>=[];
+        var wordServiceObj:WordServices=new WordServices();
+        allData=allData.concat(studentObject.studentWordDetailsArray[this.wordType].unKnownArrayList).concat(studentObject.studentWordDetailsArray[this.wordType].knownUnknownArrayList).concat(studentObject.studentWordDetailsArray[this.wordType].knwonArrayList);
+        for(let methodObj of studentObject.studentWordDetailsArray[this.wordType].methodArray)
+        {
+            if(methodObj.sessionsArray.length>0)
+            {
+                allData.concat(methodObj.sessionsArray[methodObj.sessionsArray.length-1].unknownWordList);
+            }
+        }
+        if(!wordServiceObj.checkWordExist(allData,wordDataObj)){
+            studentObject.studentWordDetailsArray[this.wordType].unKnownArrayList.push(wordDataObj);
+           // this.allData_unKnownWords.push(wordDataObj);
+            this.filterItems();
+            this.goBackToView();
+            this.error="";
+        }
+        else{
+            this.error= wordDataObj.wordText +" is already existed.";
+        }
+    }
+
+    goBackToView()
+    {
+        this.storage.set('studentObject',JSON.stringify({ studentObject: this.studentObject }) );    
+    }
+   
+}

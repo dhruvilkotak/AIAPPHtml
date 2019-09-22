@@ -1,0 +1,127 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>View Assessments</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+
+
+   <ion-content padding="'true'" scroll="false" class="has-header" >
+        <ion-grid style="height: 20%">
+                <ion-row justify-content-center align-items-center style="height: 100%">
+                        <h3> {{studentObject.studentData.firstName}}  {{studentObject.studentData.lastName}}  </h3>
+                </ion-row>
+              </ion-grid>
+       <ion-card>
+           <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar> -->
+         
+           <div *ngIf="error" class="error-message">error:{{error}}</div>
+             
+           <ion-grid style="height: 100%" >
+                <ion-row justify-content-center align-items-center style="height: 100%">
+                        <button ion-button class="submit-btn" full type="submit" (click)="lockDatasetAssessment()" >
+                            Add Set to Assessment </button>
+                </ion-row>
+            </ion-grid>
+            <ion-item  >
+      
+               <ion-row class="ion-title" style="background-color: silver;">
+                   <ion-col >Set Name</ion-col>
+                   <ion-col >Set Status</ion-col>
+                   <ion-col></ion-col>
+
+                 </ion-row>
+
+                 <form [formGroup]="studentDatasetRecordObjectGroup" (ngSubmit)="lockDatasetAssessment()" >
+               
+                    <ion-item formArrayName="studentDatasetRecordObjectGroupList" *ngFor="let studentDatasetRecordObject of selectedDatasetList; let i = index">
+                        <ion-row  >
+                            <ion-col style="color: blue" (click)="viewStudentDatasetRecordObject(studentDatasetRecordObject)" >
+                                {{studentDatasetRecordObject.datasetObject.datasetName}}
+                            </ion-col>
+                            
+                            <ion-col *ngIf="studentDatasetRecordObject.sessionTestDone">Completed </ion-col>
+                            
+                            <ion-col *ngIf="!studentDatasetRecordObject.sessionTestDone">Incomplete </ion-col>
+                            
+                            <ion-col  justify-content-center align-items-center>
+                                    <ion-item>
+                                            <ion-checkbox  checked="true"   [formControlName]="i" > {{i}}</ion-checkbox>
+                                    </ion-item>
+                                </ion-col>
+                        </ion-row>
+                        
+                    </ion-item>
+                   </form>
+
+                   <ion-item *ngFor="let studentDatasetRecordObject of notConvertedcompletedDatasetList; let i = index">
+                        <ion-row  >
+                            <ion-col style="color: blue" (click)="viewStudentDatasetRecordObject(studentDatasetRecordObject)" >
+                                {{studentDatasetRecordObject.datasetObject.datasetName}}
+                            </ion-col>
+                            
+                            <ion-col *ngIf="studentDatasetRecordObject.sessionTestDone">Completed </ion-col>
+                            
+                            <ion-col *ngIf="!studentDatasetRecordObject.sessionTestDone">Incomplete </ion-col>
+                            
+                         
+
+                            <ion-col justify-content-center align-items-center>
+                                    convet known/unknown
+                            </ion-col>
+                            
+
+                        </ion-row>
+                        
+                    </ion-item>
+
+
+                   <ion-item *ngFor="let studentDatasetRecordObject of restrictedDatasetList; let i = index">
+                        <ion-row  >
+                            <ion-col style="color: blue" (click)="viewStudentDatasetRecordObject(studentDatasetRecordObject)" >
+                                {{studentDatasetRecordObject.datasetObject.datasetName}}
+                            </ion-col>
+                            
+                            <ion-col *ngIf="studentDatasetRecordObject.sessionTestDone">Completed </ion-col>
+                            
+                            <ion-col *ngIf="!studentDatasetRecordObject.sessionTestDone">Incomplete </ion-col>
+                            
+                         
+
+                            <ion-col justify-content-center align-items-center>
+                                    view
+                            </ion-col>
+                            
+
+                        </ion-row>
+                        
+                    </ion-item>
+                    
+                   <ion-item *ngFor="let datsetObject of datasetList; ">
+                        <ion-row  >
+                            <ion-col style="color: blue" (click)="startPreAssessment(datsetObject)" >
+                                {{datsetObject.datasetName}}
+                            </ion-col>
+                            
+                            
+                            <ion-col >Incomplete </ion-col>
+                            
+                            <ion-col justify-content-center align-items-center>
+                               begin
+                            </ion-col>
+                            
+                        </ion-row>
+                        
+                    </ion-item>
+
+                
+                  
+                       
+           </ion-item>
+          
+       </ion-card>
+     </ion-content>
+   
