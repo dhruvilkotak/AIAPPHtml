@@ -13,11 +13,18 @@ Cloning this Ionic Application Steps
 Run Application 
 - ionic cordova run browser
 
+HTML pages for all devices (Android devices, IOSDevices, Web App)
+- Make all pages responsive for all devices : https://ionicacademy.com/ionic-different-device-sizes/
+
+
 How to Test Html Pages one by one 
 - open the File 'AIAPPHtml/src/app/app.component.ts'
 - try to find line "rootPage: any = Login ;" 
 - change line to "rootPage: any = {Your Module};" e.g. Login, viewWordList, addWordList etc.
 - then run application with the command "ionic cordova run browser".
+
+Deploying
+- Deploy to IOS, Android, Browser (https://ionicframework.com/docs/v3/intro/deploying/)
 
 List of Modules 
 
