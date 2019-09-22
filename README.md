@@ -18,3 +18,49 @@ How to Test Html Pages one by one
 - try to find line "rootPage: any = Login ;" 
 - change line to "rootPage: any = {Your Module};" e.g. Login, viewWordList, addWordList etc.
 - then run application with the command "ionic cordova run browser".
+
+List of Modules 
+
+| Module Name |
+|-------------|
+ |  MyApp | 
+ |  HomePage | 
+ |  Login | 
+ |  AddStudent | 
+ |  ViewStudent | 
+ |  StudentdashBoard | 
+ |  AddWordList | 
+ |  ViewWordList | 
+ |  FlashCard | 
+ |  ListPage | 
+ |  PreSessionView | 
+ |  AssessmentTest | 
+ |  FlashCardIntervetion | 
+ |  PreSessionFlashCard | 
+ |  ViewAssessmentTest | 
+ |  SessionSummary | 
+ |  PreSessionResult | 
+ |  SessionList | 
+ |  DIFlashCardSessionTest | 
+ |  LineChart | 
+ |  PreSessionAssessmentView | 
+ |  ViewStudentAllWords | 
+ |  ViewPreSessionUnKnownWord | 
+ |  PostAssessmentDashBoard | 
+ |  StartNewPostAssessment | 
+ |  ViewPostAssessmentRecordList | 
+ |  ViewPostAssessmentList | 
+ |  PostAssessmentFlashCard | 
+ |  ViewSubPostTestAssessmentRecord | 
+ |  AddEmailList | 
+ |  AddUserDetails | 
+ |  SecurityCheckUp | 
+ |  ViewStudentDatasetRecordList | 
+ |  UpdateProfile | 
+ |  AddAdminAccess | 
+ |  AdminHomePage | 
+ |  MethodRatioSelection | 
+ |  organizationRegister | 
+ |  SelectSubscription | 
+ |  AddCategoryModal |
+
