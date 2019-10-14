@@ -68,6 +68,5 @@ List of Modules
  |  AdminHomePage | 
  |  MethodRatioSelection | 
  |  organizationRegister | 
- |  SelectSubscription | 
  |  AddCategoryModal |
 
