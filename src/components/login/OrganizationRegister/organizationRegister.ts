@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { NavController } from "ionic-angular";
+import { PasswordValidator } from "../../../validation/passwordValidator";
 
 @Component({
   selector: 'page-organizationRegister',
@@ -31,6 +32,7 @@ export class organizationRegister {
   private city: string = "bellevue";
   private stateName: string = "WA";
   private contact: string = "1234567890";
+  private passwordErrors = [];
 
   constructor(public navCtrl: NavController,
     private storage: Storage) {
@@ -52,6 +54,9 @@ export class organizationRegister {
   public notify() {
     //    console.log("Toggled: "+ this.isSchool); 
   }
+  analyze(password: string) {
+    this.passwordErrors = PasswordValidator.passwordCheck(this.password);
 
+  }
 
 }

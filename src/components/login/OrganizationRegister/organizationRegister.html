@@ -1,146 +1,166 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Add User</ion-title>
-    </ion-navbar>
-    </ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Add User</ion-title>
+  </ion-navbar>
+</ion-header>
 
-    <ion-content padding>
-    <ion-grid style="height: 10%">
-      <ion-row justify-content-center align-items-center style="height: 100%">
-        <h3 > Register </h3>
-      </ion-row>
-    </ion-grid>
-    
-    
-    <div *ngIf="error" class="error-message">{{error}}</div>
-    <ion-content padding="'true'" scroll="false" class="has-header">
+<ion-content padding>
+  <ion-grid style="height: 10%">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <h3> Register</h3>
+    </ion-row>
+  </ion-grid>
 
-      <ion-card *ngIf="showForm">
 
-          <form class="list" #newStudentForm="ngForm" (ngSubmit)="continueRegistration()">
-              <ion-row>
-                  <ion-col>
-                    <ion-list inset>
-                      
-                    <ion-item>
-                        <ion-label text-wrap >Uses for : </ion-label>
-                        <ion-label text-wrap *ngIf ="isSchool" >School</ion-label>
-                        <ion-label text-wrap *ngIf ="!isSchool" >Personel</ion-label> 
-                        <ion-toggle [(ngModel)]="isSchool" (ionChange)="notify()" [ngModelOptions]="{standalone: true}">
-                        </ion-toggle>
-                       
-                    </ion-item>
-                                            
-                  <ion-item *ngIf ="isSchool">
-                      <ion-label text-wrap  >School Name : </ion-label>
-                      <ion-input name="schoolname" required [(ngModel)]="schoolname" type="text"></ion-input>
-                    </ion-item>
-                    <ion-item *ngIf ="isSchool">
-                        <ion-label text-wrap  >School Code (6 digits) : </ion-label>
-                        <ion-input name="schoolcode" required [(ngModel)]="schoolcode" type="text" maxlength="6"></ion-input>
-                      </ion-item>
-                      
+
+
+  <div *ngIf="error" class="error-message">{{error}}</div>
+  <ion-content padding="'true'" scroll="false" class="has-header">
+
+    <ion-card *ngIf="showForm">
+
+      <form class="list" #newStudentForm="ngForm" (ngSubmit)="continueRegistration()">
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
+
+              <ion-item>
+                <ion-label text-wrap>Uses for : </ion-label>
+                <ion-label text-wrap *ngIf="isSchool">School</ion-label>
+                <ion-label text-wrap *ngIf="!isSchool">Personel</ion-label>
+                <ion-toggle [(ngModel)]="isSchool" (ionChange)="notify()" [ngModelOptions]="{standalone: true}">
+                </ion-toggle>
+
+              </ion-item>
+
+              <ion-item *ngIf="isSchool">
+                <ion-label text-wrap>School Name : </ion-label>
+                <ion-input name="schoolname" required [(ngModel)]="schoolname" type="text"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="isSchool">
+                <ion-label text-wrap>School Code (6 digits) : </ion-label>
+                <ion-input name="schoolcode" required [(ngModel)]="schoolcode" type="text" maxlength="6" ></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label text-wrap>First Name : </ion-label>
+                <ion-input name="firstname" required [(ngModel)]="firstname" type="text"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label text-wrap>Last Name : </ion-label>
+                <ion-input name="lastname" required [(ngModel)]="lastname" type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label text-wrap>Address</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label text-wrap>Address line 1 : </ion-label>
+                <ion-input name="street1" required [(ngModel)]="street1" type="text"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label text-wrap>Address line 2 : </ion-label>
+                <ion-input name="street2" [(ngModel)]="street2" type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label text-wrap>Zip-Code : </ion-label>
+                <ion-input name="zipcode" required [(ngModel)]="zipcode" type="text" maxlength="6"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label text-wrap>City : </ion-label>
+                <ion-input name="city" required [(ngModel)]="city" type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label text-wrap>State : </ion-label>
+                <ion-input name="stateName" required [(ngModel)]="stateName" type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+
+                <ion-label text-wrap>Contact : </ion-label>
+
+                <ion-input name="contact" required [(ngModel)]="contact" type="text" maxlength="10"></ion-input>
+              </ion-item>
+              <ion-item>
+
+                <ion-label text-wrap>Email ID : </ion-label>
+
+                <ion-input name="emailId" required [(ngModel)]="emailId" type="email"></ion-input>
+
+              </ion-item>
+
+
+
+
+              <ion-item>
+                <ion-label text-wrap>Password :</ion-label>
+
+                <ion-input passwordValidator name="password" id="password" [type]="passwordType[0]"
+                  [(ngModel)]="password" #passwordModel="ngModel" ></ion-input>
+
+                <ion-icon item-end [name]="passwordIcon[0]" class="passwordIcon" (click)='hideShowPassword(0)'>
+                </ion-icon>
+              </ion-item>
+              <div *ngIf='passwordModel.errors'>
+                <ion-item *ngFor="let errMsg of passwordModel.errors.passwordValidator">
+                  <div class="error-message">
+                    <ion-icon name="information-circle">{{ errMsg }}</ion-icon>
+                  </div>
+                </ion-item>
+              </div>
+              <ion-item>
+                <ion-label text-wrap>Re-type Password : </ion-label>
+
+                <ion-input name="reTypePassword" [type]="passwordType[1]" required [(ngModel)]="reTypePassword">
+                </ion-input>
+                <ion-icon item-end [name]="passwordIcon[1]" class="passwordIcon" (click)='hideShowPassword(1)'>
+                </ion-icon>
+
+              </ion-item>
+              <div *ngIf='password != reTypePassword'>
                   <ion-item>
-                    <ion-label text-wrap >First Name : </ion-label>
-                    <ion-input name="firstname" required [(ngModel)]="firstname" type="text"></ion-input>
+                    <div class="error-message">
+                      <ion-icon name="information-circle"> Re-type Password is not matching the Password.</ion-icon>
+                    </div>
                   </ion-item>
-                  <ion-item>
-                      <ion-label text-wrap >Last Name : </ion-label>
-                      <ion-input  name="lastname" required [(ngModel)]="lastname" type="text"></ion-input>
-                    </ion-item>
-                   
-                    <ion-item>
-                        <ion-label text-wrap>Address</ion-label>
-                      </ion-item>
-                      <ion-item>
-                          <ion-label text-wrap >Address line 1 : </ion-label>
-                          <ion-input name="street1" required [(ngModel)]="street1" type="text"></ion-input>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label text-wrap >Address line 2 : </ion-label>
-                            <ion-input  name="street2" required [(ngModel)]="street2" type="text"></ion-input>
-                          </ion-item>
-                      
-                        <ion-item>
-                              <ion-label text-wrap >Zip-Code : </ion-label>
-                              <ion-input  name="zipcode" required [(ngModel)]="zipcode" type="text"></ion-input>
-                            </ion-item>
-                      <ion-item>
-                              <ion-label text-wrap >City : </ion-label>
-                              <ion-input  name="city" required [(ngModel)]="city" type="text"></ion-input>
-                            </ion-item>
-                            
-                      <ion-item>
-                              <ion-label text-wrap >State : </ion-label>
-                              <ion-input  name="stateName" required [(ngModel)]="stateName" type="text"></ion-input>
-                            </ion-item>
-                            
-                  <ion-item>
+                </div>
+              <ion-item>
+                <ion-label text-wrap>Security Question : </ion-label>
+                <ion-input name="securityQuestion" required [(ngModel)]="securityQuestion" type="text"></ion-input>
+              </ion-item>
 
-                          <ion-label text-wrap >Contact : </ion-label>
-                                
-                          <ion-input  name="contact" required [(ngModel)]="contact"  type="text"></ion-input>
-                   </ion-item>
-                    <ion-item>
+              <ion-item>
+                <ion-label text-wrap>Answer : </ion-label>
 
-                        <ion-label text-wrap >Email ID : </ion-label>
-                        
-                        <ion-input  name="emailId" required [(ngModel)]="emailId"  type="email"></ion-input>
+                <ion-input name="answer" [type]="passwordType[2]" required [(ngModel)]="answer"></ion-input>
+                <ion-icon item-end [name]="passwordIcon[2]" class="passwordIcon" (click)='hideShowPassword(2)'>
+                </ion-icon>
 
-                      </ion-item>
-                    
-                   
-                        
-                        
-                      <ion-item>
-                          <ion-label text-wrap >Password : </ion-label>
-                      
-                          
-                        <ion-input name="password" id="password" [type]="passwordType[0]" required [(ngModel)]="password"></ion-input>
-                        <ion-icon item-end [name]="passwordIcon[0]" class="passwordIcon" (click)='hideShowPassword(0)'></ion-icon>
-                      </ion-item>
+              </ion-item>
 
-                      <ion-item>
-                          <ion-label text-wrap >Re-type Password : </ion-label>
-                      
-                        <ion-input name="reTypePassword" [type]="passwordType[1]" required [(ngModel)]="reTypePassword"></ion-input>
-                        <ion-icon item-end [name]="passwordIcon[1]" class="passwordIcon" (click)='hideShowPassword(1)'></ion-icon>
+              <ion-grid style="height: 100%">
+                <ion-row justify-content-center align-items-center style="height: 100%">
+                  <button ion-button class="submit-btn" full type="submit"
+                    [disabled]="(!newStudentForm.form.valid) || (password != reTypePassword)">Continue Registration
+                  </button>
+                </ion-row>
+              </ion-grid>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-card>
 
-                      </ion-item>
-                      <ion-item>
-                        <ion-label text-wrap >Security Question : </ion-label>
-                        <ion-input name="securityQuestion" required [(ngModel)]="securityQuestion" type="text"></ion-input>
-                      </ion-item>
-
-                      <ion-item>
-                        <ion-label text-wrap >Answer : </ion-label>
-                    
-                      <ion-input name="answer" [type]="passwordType[2]" required [(ngModel)]="answer"></ion-input>
-                      <ion-icon item-end [name]="passwordIcon[2]" class="passwordIcon" (click)='hideShowPassword(2)'></ion-icon>
-
-                    </ion-item>
-
-                            <ion-grid style="height: 100%">
-                                <ion-row justify-content-center align-items-center style="height: 100%">
-                                        <button ion-button class="submit-btn" full type="submit" [disabled]="!newStudentForm.form.valid">Continue Registration
-                                          </button>
-                                  </ion-row>
-                              </ion-grid>
-                  </ion-list>
-              </ion-col>
-              </ion-row>
-            </form>
-        </ion-card>
-        
-        <ion-card *ngIf="!showForm">
-          <ion-item>
-            <ion-label text-wrap *ngIf="!emailVerfied"> Check your Email and verify it by clicking the link provided in Email. </ion-label>
-          </ion-item>
-        </ion-card>
-      </ion-content>
-    </ion-content>
-    
- 
+    <ion-card *ngIf="!showForm">
+      <ion-item>
+        <ion-label text-wrap *ngIf="!emailVerfied"> Check your Email and verify it by clicking the link provided in
+          Email. </ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-content>
+</ion-content>

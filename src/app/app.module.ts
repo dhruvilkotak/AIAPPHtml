@@ -58,10 +58,7 @@ import { ListPage } from '../pages/list/list';
 import { DataProvider } from '../providers/data/data';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { MyApp } from './app.component';
-
-
-
-
+import { PasswordValidator } from '../validation/passwordValidator';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDnFDx9WT_WnS0q4avo6BsoKUl9Cc5jJx0",
@@ -116,7 +113,8 @@ firebase.initializeApp(firebaseConfig);
     MethodRatioSelection,
     organizationRegister,
     SelectSubscription,
-    AddCategoryModal
+    AddCategoryModal,
+    PasswordValidator
   ],
   imports: [
     BrowserModule,
