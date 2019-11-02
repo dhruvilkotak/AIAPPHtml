@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AddStudent } from '../AddStudent/AddStudent';
 import { User } from '../../models/user';
-import { ViewStudent } from '../viewStudent/viewStudent';
 import { Storage } from '@ionic/storage';
 import { OrganizationDetails } from '../../models/organizationDetails';
+import { AddStudent } from '../manageStudentDetails/AddStudent/AddStudent';
+import { ViewStudent } from '../manageStudentDetails/viewStudent/viewStudent';
 
 @Component({
   selector: 'page-home',
@@ -24,11 +24,11 @@ export class HomePage {
 
   goAddStudentPage()
   {
-    //this.navCtrl.push(AddStudent);
+    this.navCtrl.push(AddStudent);
   }
   goExistingStudentPage()
   {
-    //this.navCtrl.push(ViewStudent);
+    this.navCtrl.push(ViewStudent);
   }
 
   

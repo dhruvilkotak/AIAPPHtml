@@ -15,7 +15,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import * as firebase from 'firebase';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ChartsModule } from 'ng2-charts';
-import { AddStudent } from '../components/AddStudent/AddStudent';
 import { AddCategoryModal } from '../components/addWordList/addCategoryModal/addCategoryModal';
 import { AddWordList } from '../components/addWordList/addWordList';
 import { AssessmentTest } from '../components/Assessment/BeginAssessmentTest/assessmentTest';
@@ -51,7 +50,6 @@ import { ViewSubPostTestAssessmentRecord } from '../components/PostAssessment/vi
 import { MethodRatioSelection } from '../components/studentDashBoard/methodRatioSelection/methodRatioSelection';
 import { StudentdashBoard } from '../components/studentDashBoard/studentDashBoard';
 import { ViewStudentAllWords } from '../components/studentDashBoard/ViewStudentAllWords/viewStudentAllWords';
-import { ViewStudent } from '../components/viewStudent/viewStudent';
 import { ViewWordList } from '../components/viewWordList/viewWordList';
 import { GlobalVariables } from '../models/globalVariables';
 import { ListPage } from '../pages/list/list';
@@ -59,6 +57,8 @@ import { DataProvider } from '../providers/data/data';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { MyApp } from './app.component';
 import { PasswordValidator } from '../validation/passwordValidator';
+import { AddStudent } from '../components/manageStudentDetails/AddStudent/AddStudent';
+import { ViewStudent } from '../components/manageStudentDetails/viewStudent/viewStudent';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDnFDx9WT_WnS0q4avo6BsoKUl9Cc5jJx0",

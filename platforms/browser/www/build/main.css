@@ -25780,6 +25780,11 @@ page-addWordList .update-profile-modal .modal-wrapper {
   margin: 0 auto !important;
 }
 
+.error-message {
+  font-size: x-small;
+  color: red;
+}
+
 .passwordIcon {
   font-size: 2rem !important;
   position: relative !important;
