@@ -1,30 +1,31 @@
-import { Component } from '@angular/core';
-import { File } from '@ionic-native/file';
-import { WordData } from '../../../models/wordData';
-import { WordServices } from '../../../services/wordServices';
-import { Student } from '../../../models/student';
-import { ArrayService } from '../../../services/arrayService';
-import { NavController, NavParams, ViewController, RangeKnob } from 'ionic-angular';
-import { KnownUnknownWordData } from '../../../models/knownUnknownWordData';
-import { PostTestWordData } from '../../../models/PostTestWordData';
-import { PostTestWordDataRecordList } from '../../../models/postTestWordDataRecordList';
-import { PostTestAssessmentService } from '../../../services/postTestAssessmentService';
-import { Storage } from '@ionic/storage';
-import { TextToSpeech } from '@ionic-native/text-to-speech';
-import { OrganizationDetails } from '../../../models/organizationDetails';
-import { FlashcardService } from '../../../services/flashcardService';
+import { Component } from "@angular/core";
+import { File } from "@ionic-native/file";
+import { WordData } from "../../../models/wordData";
+import { WordServices } from "../../../services/wordServices";
+import { Student } from "../../../models/student";
+import { ArrayService } from "../../../services/arrayService";
+import {
+  NavController,
+  NavParams,
+  ViewController,
+  RangeKnob
+} from "ionic-angular";
+import { KnownUnknownWordData } from "../../../models/knownUnknownWordData";
+import { PostTestWordData } from "../../../models/PostTestWordData";
+import { PostTestWordDataRecordList } from "../../../models/postTestWordDataRecordList";
+import { PostTestAssessmentService } from "../../../services/postTestAssessmentService";
+import { Storage } from "@ionic/storage";
+import { TextToSpeech } from "@ionic-native/text-to-speech";
+import { OrganizationDetails } from "../../../models/organizationDetails";
+import { FlashcardService } from "../../../services/flashcardService";
 
 @Component({
-  selector: 'page-blueflashcard',
-  templateUrl: '../../../htmlpages/blueflashcard/blueflashcard.html'
+  selector: "page-blueflashcard",
+  templateUrl: "../../../htmlpages/blueflashcard/blueflashcard.html"
 })
-
-
 export class PostAssessmentFlashCard {
-
   private postTestWordDataObject: PostTestWordData = new PostTestWordData();
   private wordDataObject: WordData = new WordData();
-
 
   private wordDataArray: Array<PostTestWordData> = [new PostTestWordData()];
   private TestTitle: String = "";
@@ -48,33 +49,31 @@ export class PostAssessmentFlashCard {
     console.log("onviewdidload");
   }
 
-  constructor(private file: File,
+  constructor(
+    private file: File,
     public navCtrl: NavController,
     private navParams: NavParams,
     private viewCtrl: ViewController,
     private storage: Storage,
-    private tts: TextToSpeech) {
-
-   }
+    private tts: TextToSpeech
+  ) {}
 
   greenCircleClick() {
     this.showAnswer = false;
     this.totalKnownCounter++;
     if (this.postTestWordDataObject.isKnown == null)
       this.postTestWordDataObject.isKnown = [];
-    this.postTestWordDataObject.isKnown.push(true)
+    this.postTestWordDataObject.isKnown.push(true);
     if (this.postTestWordDataObject.totalKnownWord == null)
       this.postTestWordDataObject.totalKnownWord = 0;
     this.postTestWordDataObject.totalKnownWord++;
 
     if (this.currentCardNumber < this.wordDataArray.length) {
-
       this.postTestWordDataObject = this.wordDataArray[this.currentCardNumber];
       this.wordDataObject = this.postTestWordDataObject.wordData;
       this.convertTextToMath(this.postTestWordDataObject.wordData.wordText);
       this.currentCardNumber++;
-    }
-    else {
+    } else {
       console.log("else:green");
       this.goBackToView();
     }
@@ -84,63 +83,98 @@ export class PostAssessmentFlashCard {
     if (this.postTestWordDataObject.isKnown == null)
       this.postTestWordDataObject.isKnown = [];
 
-    this.postTestWordDataObject.isKnown.push(false)
+    this.postTestWordDataObject.isKnown.push(false);
 
     if (this.currentCardNumber < this.wordDataArray.length) {
       this.postTestWordDataObject = this.wordDataArray[this.currentCardNumber];
       this.wordDataObject = this.postTestWordDataObject.wordData;
       this.convertTextToMath(this.postTestWordDataObject.wordData.wordText);
       this.currentCardNumber++;
-    }
-    else {
+    } else {
       console.log("else:green");
       this.goBackToView();
     }
   }
   goBackToView() {
-    if (this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray == null)
-      this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray = [];
+    if (
+      this.studentObject.studentWordDetailsArray[this.wordType]
+        .postTestWordDataRecordListArray == null
+    )
+      this.studentObject.studentWordDetailsArray[
+        this.wordType
+      ].postTestWordDataRecordListArray = [];
 
     this.postTestWordDataRecordListObject.postTestWordDataArray = this.wordDataArray;
     if (this.postTestWordDataRecordListObject.knownCounterArray == null) {
       this.postTestWordDataRecordListObject.knownCounterArray = [];
-    }
-    else {
-      this.postTestWordDataRecordListObject.knownCounterArray[this.subTestIndex] = this.totalKnownCounter;
+    } else {
+      this.postTestWordDataRecordListObject.knownCounterArray[
+        this.subTestIndex
+      ] = this.totalKnownCounter;
     }
     if (this.postTestWordDataRecordListObject.subTestCompleted == null)
       this.postTestWordDataRecordListObject.subTestCompleted = 0;
     this.postTestWordDataRecordListObject.subTestCompleted++;
     if (this.subTestIndex > 0) {
-      if (this.postTestWordDataRecordListObject.consistancyPercentageArray == null) {
+      if (
+        this.postTestWordDataRecordListObject.consistancyPercentageArray == null
+      ) {
         this.postTestWordDataRecordListObject.consistancyPercentageArray = [];
       }
-      this.postTestWordDataRecordListObject.consistancyPercentageArray[this.subTestIndex] =
-        this.postTestWordDataRecordListObject.knownCounterArray[this.subTestIndex] -
-        this.postTestWordDataRecordListObject.knownCounterArray[this.subTestIndex - 1];
+      this.postTestWordDataRecordListObject.consistancyPercentageArray[
+        this.subTestIndex
+      ] =
+        this.postTestWordDataRecordListObject.knownCounterArray[
+          this.subTestIndex
+        ] -
+        this.postTestWordDataRecordListObject.knownCounterArray[
+          this.subTestIndex - 1
+        ];
     }
 
-    var postTestAssessmentService: PostTestAssessmentService = new PostTestAssessmentService(this.organizationDetails.organizationDetailsUID, this.wordType);
-    if (this.testIndex < this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray.length)
-      this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray[this.testIndex] = this.postTestWordDataRecordListObject;
+    var postTestAssessmentService: PostTestAssessmentService = new PostTestAssessmentService(
+      this.organizationDetails.organizationDetailsUID,
+      this.wordType
+    );
+    if (
+      this.testIndex <
+      this.studentObject.studentWordDetailsArray[this.wordType]
+        .postTestWordDataRecordListArray.length
+    )
+      this.studentObject.studentWordDetailsArray[
+        this.wordType
+      ].postTestWordDataRecordListArray[
+        this.testIndex
+      ] = this.postTestWordDataRecordListObject;
     else
-      this.studentObject.studentWordDetailsArray[this.wordType].postTestWordDataRecordListArray.push(this.postTestWordDataRecordListObject);
-    postTestAssessmentService.addPostTestWordDataRecordListObject(this.studentObject, this.testIndex);
+      this.studentObject.studentWordDetailsArray[
+        this.wordType
+      ].postTestWordDataRecordListArray.push(
+        this.postTestWordDataRecordListObject
+      );
+    postTestAssessmentService.addPostTestWordDataRecordListObject(
+      this.studentObject,
+      this.testIndex
+    );
     if (this.subTestIndex == 2)
-
-      postTestAssessmentService.updateKnownUnknownWordData(this.studentObject, this.wordDataArray);
+      postTestAssessmentService.updateKnownUnknownWordData(
+        this.studentObject,
+        this.wordDataArray
+      );
 
     if (Student != null) {
       //console.log("studentName:"+studentObject.firstName+" "+studentObject.lastName+" ass len:"+studentObject.assessmentDataArrayObject.length);
-      this.storage.set('studentObject', JSON.stringify({ studentObject: this.studentObject }));
+      this.storage.set(
+        "studentObject",
+        JSON.stringify({ studentObject: this.studentObject })
+      );
     }
 
     this.navCtrl.pop();
   }
 
   textToSpeechWordData(text: string) {
-    this.flashcardService.textToSpeechWordData(text, this.tts, this.showAnswer)
-
+    this.flashcardService.textToSpeechWordData(text, this.tts, this.showAnswer);
   }
 
   getAnswer(equation: string) {
@@ -152,8 +186,9 @@ export class PostAssessmentFlashCard {
   }
 
   convertTextToMath(mathString: String) {
-
-    var convertTextToMathResult = this.flashcardService.convertTextToMath(mathString);
+    var convertTextToMathResult = this.flashcardService.convertTextToMath(
+      mathString
+    );
     this.result = convertTextToMathResult.result;
     this.operation = convertTextToMathResult.operation;
     this.number1 = convertTextToMathResult.number1;

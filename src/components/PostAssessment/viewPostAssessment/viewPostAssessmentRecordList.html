@@ -10,12 +10,23 @@
 <ion-content padding>
   <ion-grid style="height: 10%">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3> {{studentObject.studentData.firstName}} {{studentObject.studentData.lastName}} </h3>
+      <h3>
+        {{studentObject.studentData.firstName}}
+        {{studentObject.studentData.lastName}}
+      </h3>
     </ion-row>
   </ion-grid>
   <div *ngIf="error" class="error-message">{{error}}</div>
 
-  <div col-sm-12 col-md-8 col-lg-8 col-xl-8 padding="'true'" scroll="false" class="has-header margin-auto">
+  <div
+    col-sm-12
+    col-md-8
+    col-lg-8
+    col-xl-8
+    padding="'true'"
+    scroll="false"
+    class="has-header margin-auto"
+  >
     <ion-card style="margin-top: 8%;">
       <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar> -->
 
@@ -23,18 +34,25 @@
         <ion-row class="ion-title" style="background-color: silver;">
           <ion-col>Post Assessment Test Index</ion-col>
           <ion-col>Test Status</ion-col>
-
         </ion-row>
-        <ion-item *ngFor="let postTestWordDataObject of postTestWordDataRecordListArray; let i = index">
+        <ion-item
+          *ngFor="let postTestWordDataObject of postTestWordDataRecordListArray; let i = index"
+        >
           <ion-row>
-            <ion-col style="color: blue" (click)="viewPostTestAssessment(i)">Post Test {{i+1}}</ion-col>
-            <ion-col *ngIf="postTestWordDataObject.subTestCompleted < postTestWordDataObject.maxTest">
+            <ion-col style="color: blue" (click)="viewPostTestAssessment(i)"
+              >Post Test {{i+1}}</ion-col
+            >
+            <ion-col
+              *ngIf="postTestWordDataObject.subTestCompleted < postTestWordDataObject.maxTest"
+            >
               <ion-col>
                 Incomplete
               </ion-col>
             </ion-col>
 
-            <ion-col *ngIf="postTestWordDataObject.subTestCompleted == postTestWordDataObject.maxTest">
+            <ion-col
+              *ngIf="postTestWordDataObject.subTestCompleted == postTestWordDataObject.maxTest"
+            >
               <ion-col>
                 Completed
               </ion-col>
@@ -42,7 +60,6 @@
           </ion-row>
         </ion-item>
       </ion-item>
-
     </ion-card>
   </div>
 </ion-content>

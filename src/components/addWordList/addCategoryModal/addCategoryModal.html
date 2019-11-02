@@ -1,82 +1,120 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Select Category</ion-title>
-    </ion-navbar>
-    </ion-header>
-    
-    <ion-content padding>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Select Category</ion-title>
+  </ion-navbar>
+</ion-header>
 
-    <ion-content padding="'true'" scroll="false" class="has-header">
-        <ion-card>
-          
-            <form class="list" #categoryForm="ngForm" (ngSubmit)="addNewCategory()">
-                <ion-row>
-                    <ion-col>
-                      <ion-list inset>
-                
-                        <ion-item>
-                          <ion-label text-wrap >Enter Category : </ion-label>
-                          <ion-input name="newCategory" required [(ngModel)]="newCategory" type="text"></ion-input>
-                        </ion-item>
-                          
-                          <ion-grid style="height: 100%">
-                              <ion-row justify-content-center align-items-center style="height: 100%">
-                                    <button ion-button class="submit-btn" full type="submit" [disabled]="!categoryForm.form.valid">Add Category 
-                                    </button>
-                              </ion-row>
-                          </ion-grid>
-          
-                    </ion-list>
-                </ion-col>
+<ion-content padding>
+  <ion-content padding="'true'" scroll="false" class="has-header">
+    <ion-card>
+      <form class="list" #categoryForm="ngForm" (ngSubmit)="addNewCategory()">
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
+              <ion-item>
+                <ion-label text-wrap>Enter Category : </ion-label>
+                <ion-input
+                  name="newCategory"
+                  required
+                  [(ngModel)]="newCategory"
+                  type="text"
+                ></ion-input>
+              </ion-item>
+
+              <ion-grid style="height: 100%">
+                <ion-row
+                  justify-content-center
+                  align-items-center
+                  style="height: 100%"
+                >
+                  <button
+                    ion-button
+                    class="submit-btn"
+                    full
+                    type="submit"
+                    [disabled]="!categoryForm.form.valid"
+                  >
+                    Add Category
+                  </button>
                 </ion-row>
-              </form>
-    
-          <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar>
-          <ion-list radio-group >
-                <ion-grid>
-                  <ion-item *ngFor="let categoryObject of categoriesList; let i = index">
-
-                      <ion-row  >
-                        
-                        <ion-col col-2> 
-                                <ion-grid style="height: 100%">
-                                        <ion-row justify-content-center align-items-center style="height: 100%">
-                                        
-                                <ion-item>
-                                    <ion-radio *ngIf="i == 0" slot="selectedCategory" value="{{categoryObject}}" checked  (ionSelect)="selectedCategory(categoryObject)">        
-
-                                    </ion-radio>
-                                        <ion-radio *ngIf="i != 0" slot="selectedCategory" value="{{categoryObject}}"   (ionSelect)="selectedCategory(categoryObject)" >        
-                                        </ion-radio>
-                                   </ion-item>
-                                        </ion-row> 
-                                   </ion-grid>
-                        </ion-col>
-                        <ion-col >
-                                <ion-grid style="height: 100%">
-                                        <ion-row justify-content-center align-items-center style="height: 100%">
-                                    
-                            {{categoryObject}}
-                                </ion-row>
-                            </ion-grid>
-                        </ion-col>
-                        <ion-col >
-                                <ion-grid style="height: 100%">
-                                        <ion-row justify-content-center align-items-center style="height: 100%">
-                                    
-                            <button ion-button color="danger" (click) = "removeCategory(categoryObject)"> <ion-icon name="trash" ></ion-icon>Delete</button>
-                                </ion-row>
-                            </ion-grid>
-                        </ion-col>
-                      
-                      </ion-row>
-                    </ion-item>
-                </ion-grid>
+              </ion-grid>
             </ion-list>
-        </ion-card>
-      </ion-content>
-    </ion-content>
-    
+          </ion-col>
+        </ion-row>
+      </form>
+
+      <ion-searchbar
+        [(ngModel)]="searchTerm"
+        (ionInput)="filterItems()"
+      ></ion-searchbar>
+      <ion-list radio-group>
+        <ion-grid>
+          <ion-item
+            *ngFor="let categoryObject of categoriesList; let i = index"
+          >
+            <ion-row>
+              <ion-col col-2>
+                <ion-grid style="height: 100%">
+                  <ion-row
+                    justify-content-center
+                    align-items-center
+                    style="height: 100%"
+                  >
+                    <ion-item>
+                      <ion-radio
+                        *ngIf="i == 0"
+                        slot="selectedCategory"
+                        value="{{categoryObject}}"
+                        checked
+                        (ionSelect)="selectedCategory(categoryObject)"
+                      >
+                      </ion-radio>
+                      <ion-radio
+                        *ngIf="i != 0"
+                        slot="selectedCategory"
+                        value="{{categoryObject}}"
+                        (ionSelect)="selectedCategory(categoryObject)"
+                      >
+                      </ion-radio>
+                    </ion-item>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+              <ion-col>
+                <ion-grid style="height: 100%">
+                  <ion-row
+                    justify-content-center
+                    align-items-center
+                    style="height: 100%"
+                  >
+                    {{categoryObject}}
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+              <ion-col>
+                <ion-grid style="height: 100%">
+                  <ion-row
+                    justify-content-center
+                    align-items-center
+                    style="height: 100%"
+                  >
+                    <button
+                      ion-button
+                      color="danger"
+                      (click)="removeCategory(categoryObject)"
+                    >
+                      <ion-icon name="trash"></ion-icon>Delete
+                    </button>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-grid>
+      </ion-list>
+    </ion-card>
+  </ion-content>
+</ion-content>

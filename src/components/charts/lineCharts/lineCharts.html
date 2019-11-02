@@ -8,20 +8,29 @@
 </ion-header>
 
 <ion-content padding>
-  <h3> Growth Charts</h3>
-  <div col-sm-12 col-md-8 col-lg-8 col-xl-8 has-header="true" padding="true" ng-controller="AppCtrl as ctrl"
-    class="margin-auto">
+  <h3>Growth Charts</h3>
+  <div
+    col-sm-12
+    col-md-8
+    col-lg-8
+    col-xl-8
+    has-header="true"
+    padding="true"
+    ng-controller="AppCtrl as ctrl"
+    class="margin-auto"
+  >
     <!-- <ion-card> -->
     <div style="width: 70%;" *ngIf="chartData.length > 0">
-      <canvas 
-        baseChart 
-        [chartType]="'line'" 
-        [datasets]="chartData" 
-        [labels]="chartLabels" 
+      <canvas
+        baseChart
+        [chartType]="'line'"
+        [datasets]="chartData"
+        [labels]="chartLabels"
         [options]="chartOptions"
         [colors]="myColors"
-        [legend]="true" 
-        (chartClick)="onChartClick($event)">
+        [legend]="true"
+        (chartClick)="onChartClick($event)"
+      >
       </canvas>
     </div>
 

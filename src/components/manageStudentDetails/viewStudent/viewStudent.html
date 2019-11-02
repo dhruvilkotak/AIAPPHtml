@@ -10,20 +10,36 @@
 <ion-content padding>
   <ion-grid style="height: 10%">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3> View Student : </h3>
+      <h3>View Student :</h3>
     </ion-row>
   </ion-grid>
 
-
   <div *ngIf="error" class="error-message">{{error}}</div>
-  <div padding="'true'" scroll="false" class="has-header margin-auto" col-md-6 col-lg-6 col-xl-6>
+  <div
+    padding="'true'"
+    scroll="false"
+    class="has-header margin-auto"
+    col-md-6
+    col-lg-6
+    col-xl-6
+  >
     <ion-card>
-      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar>
+      <ion-searchbar
+        [(ngModel)]="searchTerm"
+        (ionInput)="filterItems()"
+      ></ion-searchbar>
 
       <ion-grid style="height: 100%">
         <ion-row justify-content-center align-items-center style="height: 100%">
-          <button ion-button class="submit-btn" full type="submit" (click)="exportStudentFile()">Export
-            Students</button>
+          <button
+            ion-button
+            class="submit-btn"
+            full
+            type="submit"
+            (click)="exportStudentFile()"
+          >
+            Export Students
+          </button>
         </ion-row>
       </ion-grid>
 
@@ -41,11 +57,17 @@
         </ion-row>
         <ion-item *ngFor="let studentObjects of studentDetailsArray">
           <ion-row>
-            <ion-col (click)="viewStudentData(studentObjects)">{{studentObjects.studentId}}</ion-col>
-            <ion-col (click)="viewStudentData(studentObjects)">{{studentObjects.firstName}} {{studentObjects.lastName}}
+            <ion-col (click)="viewStudentData(studentObjects)"
+              >{{studentObjects.studentId}}</ion-col
+            >
+            <ion-col (click)="viewStudentData(studentObjects)"
+              >{{studentObjects.firstName}} {{studentObjects.lastName}}
             </ion-col>
             <ion-col>
-              <ion-item (click)="removeStudent(studentObjects)" style="color: blue">
+              <ion-item
+                (click)="removeStudent(studentObjects)"
+                style="color: blue"
+              >
                 Remove Student
               </ion-item>
             </ion-col>

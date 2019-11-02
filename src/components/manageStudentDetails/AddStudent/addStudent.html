@@ -3,45 +3,77 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf="organizationDetails.isSchool">{{organizationDetails.schoolName}} - Add Student</ion-title>
+    <ion-title *ngIf="organizationDetails.isSchool"
+      >{{organizationDetails.schoolName}} - Add Student</ion-title
+    >
     <ion-title *ngIf="! organizationDetails.isSchool"> Add Student</ion-title>
-
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-grid style="height: 10%">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3> Add Student Details : </h3>
+      <h3>Add Student Details :</h3>
     </ion-row>
   </ion-grid>
 
-
   <div *ngIf="error" class="error-message">{{error}}</div>
-  <div padding="'true'" scroll="false" class="has-header" col-md-6 col-lg-6 col-xl-6 class="margin-auto">
+  <div
+    padding="'true'"
+    scroll="false"
+    class="has-header"
+    col-md-6
+    col-lg-6
+    col-xl-6
+    class="margin-auto"
+  >
     <ion-card>
       <form class="list" #newStudentForm="ngForm" (ngSubmit)="addNewStudent()">
         <ion-row>
           <ion-col>
             <ion-list inset>
-
               <ion-item>
                 <ion-label text-wrap>First Name : </ion-label>
-                <ion-input name="firstname" required [(ngModel)]="firstname" type="text"></ion-input>
+                <ion-input
+                  name="firstname"
+                  required
+                  [(ngModel)]="firstname"
+                  type="text"
+                ></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label text-wrap>Last Name : </ion-label>
-                <ion-input name="lastname" required [(ngModel)]="lastname" type="text"></ion-input>
+                <ion-input
+                  name="lastname"
+                  required
+                  [(ngModel)]="lastname"
+                  type="text"
+                ></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label text-wrap>Student Id : </ion-label>
-                <ion-input name="studentid" required [(ngModel)]="studentid" type="text"></ion-input>
+                <ion-input
+                  name="studentid"
+                  required
+                  [(ngModel)]="studentid"
+                  type="text"
+                ></ion-input>
               </ion-item>
 
               <ion-grid style="height: 100%">
-                <ion-row justify-content-center align-items-center style="height: 100%">
-                  <button ion-button class="submit-btn" full type="submit" [disabled]="!newStudentForm.form.valid">Add
-                    Student
+                <ion-row
+                  justify-content-center
+                  align-items-center
+                  style="height: 100%"
+                >
+                  <button
+                    ion-button
+                    class="submit-btn"
+                    full
+                    type="submit"
+                    [disabled]="!newStudentForm.form.valid"
+                  >
+                    Add Student
                   </button>
                 </ion-row>
               </ion-grid>

@@ -5,12 +5,10 @@ import { PostTestWordDataRecordList } from "../../../models/postTestWordDataReco
 import { Student } from "../../../models/student";
 
 @Component({
-  selector: 'page-viewSubPostTestAssessmentRecord',
-  templateUrl: 'viewSubPostTestAssessmentRecord.html'
+  selector: "page-viewSubPostTestAssessmentRecord",
+  templateUrl: "viewSubPostTestAssessmentRecord.html"
 })
-
 export class ViewSubPostTestAssessmentRecord {
-
   private error: String = "Error Message";
   private studentObject: Student = new Student();
   private postTestWordDataRecordListObject: PostTestWordDataRecordList = new PostTestWordDataRecordList();
@@ -20,17 +18,21 @@ export class ViewSubPostTestAssessmentRecord {
   private totalKnowns: number = 0;
   private totalUnKnowns: number = 0;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     private storage: Storage,
-    private navParams: NavParams) {
-  }
+    private navParams: NavParams
+  ) {}
 
   countKnownWords() {
-    for (let postTestWordDataObj of this.postTestWordDataRecordListObject.postTestWordDataArray) {
-      if (postTestWordDataObj.totalKnownWord >= Math.round(0.67 * this.numbers.length)) {
+    for (let postTestWordDataObj of this.postTestWordDataRecordListObject
+      .postTestWordDataArray) {
+      if (
+        postTestWordDataObj.totalKnownWord >=
+        Math.round(0.67 * this.numbers.length)
+      ) {
         this.totalKnowns++;
-      }
-      else {
+      } else {
         this.totalUnKnowns++;
       }
     }

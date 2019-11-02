@@ -13,27 +13,41 @@
         <ion-col>
           <ion-list inset>
             <ion-item>
-              <ion-input placeholder="Email ID" name="emailId" type="email" required [(ngModel)]="emailId"></ion-input>
+              <ion-input
+                placeholder="Email ID"
+                name="emailId"
+                type="email"
+                required
+                [(ngModel)]="emailId"
+              ></ion-input>
             </ion-item>
-
           </ion-list>
-
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Verify Email
+          <button
+            ion-button
+            class="submit-btn"
+            full
+            type="submit"
+            [disabled]="!loginForm.form.valid"
+          >
+            Verify Email
           </button>
         </ion-col>
       </ion-row>
     </form>
 
-    <form *ngIf="emailVerified" #securityQuestion="ngForm" (ngSubmit)="verifySecurity()" autocomplete="off">
+    <form
+      *ngIf="emailVerified"
+      #securityQuestion="ngForm"
+      (ngSubmit)="verifySecurity()"
+      autocomplete="off"
+    >
       <ion-row>
         <ion-col>
           <ion-list inset>
-
             <ion-item>
               <ion-label text-wrap>
                 {{question}}
@@ -41,27 +55,37 @@
             </ion-item>
 
             <ion-item>
-              <ion-input placeholder="Answer " name="answer" [type]="passwordType[0]" required [(ngModel)]="answer">
+              <ion-input
+                placeholder="Answer "
+                name="answer"
+                [type]="passwordType[0]"
+                required
+                [(ngModel)]="answer"
+              >
               </ion-input>
-              <ion-icon item-end [name]="passwordIcon[0]" class="passwordIcon" (click)='hideShowPassword(0)'></ion-icon>
-
+              <ion-icon
+                item-end
+                [name]="passwordIcon[0]"
+                class="passwordIcon"
+                (click)="hideShowPassword(0)"
+              ></ion-icon>
             </ion-item>
-
           </ion-list>
-
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!securityQuestion.form.valid">Verify
-            Email
+          <button
+            ion-button
+            class="submit-btn"
+            full
+            type="submit"
+            [disabled]="!securityQuestion.form.valid"
+          >
+            Verify Email
           </button>
         </ion-col>
       </ion-row>
     </form>
-
-
-
   </ion-card>
 </ion-content>

@@ -10,25 +10,39 @@
 <ion-content padding>
   <ion-grid style="height: 10%">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3> {{studentObject.studentData.firstName}} {{studentObject.studentData.lastName}} </h3>
+      <h3>
+        {{studentObject.studentData.firstName}}
+        {{studentObject.studentData.lastName}}
+      </h3>
     </ion-row>
   </ion-grid>
-  <div col-md-6 col-lg-6 col-xl-6 has-header="true" padding="true" ng-controller="AppCtrl as ctrl" class="margin-auto">
+  <div
+    col-md-6
+    col-lg-6
+    col-xl-6
+    has-header="true"
+    padding="true"
+    ng-controller="AppCtrl as ctrl"
+    class="margin-auto"
+  >
     <div style=" padding-top: 25%">
       <div *ngIf="error" class="error-message">{{error}}</div>
 
       <div class="row row-center">
         <div class="col col-center">
-          <button ion-button (click)="startNewPostAssessment()" block> Start New Post Assessment </button>
+          <button ion-button (click)="startNewPostAssessment()" block>
+            Start New Post Assessment
+          </button>
         </div>
       </div>
 
       <div class="row row-center">
         <div class="col col-center">
-          <button ion-button (click)="viewPostAssessmentList()" block>View Post Assessment List</button>
+          <button ion-button (click)="viewPostAssessmentList()" block>
+            View Post Assessment List
+          </button>
         </div>
       </div>
-
     </div>
   </div>
 </ion-content>
