@@ -6,9 +6,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding center text-center>
-  <ion-card>
+  <ion-card col-md-6 col-lg-6 col-xl-6 class="margin-auto">
     <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-
     <form #loginForm="ngForm" (ngSubmit)="verifyEmail()" autocomplete="off">
       <ion-row>
         <ion-col>
@@ -42,7 +41,8 @@
             </ion-item>
 
             <ion-item>
-              <ion-input placeholder="Answer " name="answer" [type]="passwordType[0]" required [(ngModel)]="answer"></ion-input>
+              <ion-input placeholder="Answer " name="answer" [type]="passwordType[0]" required [(ngModel)]="answer">
+              </ion-input>
               <ion-icon item-end [name]="passwordIcon[0]" class="passwordIcon" (click)='hideShowPassword(0)'></ion-icon>
 
             </ion-item>

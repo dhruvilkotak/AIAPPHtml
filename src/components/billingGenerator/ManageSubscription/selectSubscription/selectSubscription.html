@@ -1,73 +1,73 @@
 <ion-header>
-        <ion-navbar>
-          <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
-          <ion-title>Manage Subscription</ion-title>
-        </ion-navbar>
-        </ion-header>
-    
-        <ion-content padding>
-        <ion-grid style="height: 10%">
-          <ion-row justify-content-center align-items-center style="height: 100%">
-            <h3 > Subscription </h3>
-          </ion-row>
-        </ion-grid>
-        
-        
-        <div *ngIf="error" class="error-message">{{error}}</div>
-        <ion-content padding="'true'" scroll="false" class="has-header">
-    
-          <ion-card >
-    
-              <form class="list" #newStudentForm="ngForm" (ngSubmit)="subscribe()">
-                  <ion-row>
-                      <ion-col>
-                        <ion-list inset>
-                          
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Manage Subscription</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid style="height: 10%">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <h3> Subscription </h3>
+    </ion-row>
+  </ion-grid>
+
+
+  <div *ngIf="error" class="error-message">{{error}}</div>
+  <div col-md-6 col-lg-6 col-xl-6 padding="'true'" scroll="false" class="has-header margin-auto">
+
+    <ion-card>
+
+      <form class="list" #newStudentForm="ngForm" (ngSubmit)="subscribe()">
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
+
+              <ion-item>
+                <ion-label text-wrap>Amount ( $ ): </ion-label>
+                <ion-input name="amount" required [(ngModel)]="amount" type="text"></ion-input>
+              </ion-item>
+
+              <form class="list" #couponCodeForm="ngForm" (ngSubmit)="applyCoupon()">
+
+                <ion-grid style="height: 100%">
+                  <ion-row justify-content-center align-items-center style="height: 100%">
+                    <ion-col>
                       <ion-item>
-                        <ion-label text-wrap >Amount ( $ ): </ion-label>
-                        <ion-input name="amount" required [(ngModel)]="amount" type="text" ></ion-input>
+                        <ion-label text-wrap>Coupon Code : </ion-label>
+                        <ion-input name="couponCode" required [(ngModel)]="couponCode" type="text"></ion-input>
                       </ion-item>
 
-                      <form class="list" #couponCodeForm="ngForm" (ngSubmit)="applyCoupon()">
-               
-                      <ion-grid style="height: 100%">
-                          <ion-row justify-content-center align-items-center style="height: 100%">
-                            <ion-col>
-                                <ion-item>
-                                    <ion-label text-wrap >Coupon Code : </ion-label>
-                                    <ion-input name="couponCode" required [(ngModel)]="couponCode" type="text"></ion-input>
-                                </ion-item>
-                      
-                            </ion-col>
-                              <ion-col>
-                                  <button ion-button class="submit-btn" full type="submit" [disabled]="!couponCodeForm.form.valid">Subscribe
-                                    </button>
-                            
-                              </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                        </form>
-                               
-                        <ion-grid style="height: 100%">
-                                    <ion-row justify-content-center align-items-center style="height: 100%">
-                                            <button ion-button class="submit-btn" full type="submit" [disabled]="!newStudentForm.form.valid">Subscribe
-                                              </button>
-                                      </ion-row>
-                                  </ion-grid>
-                      </ion-list>
-                  </ion-col>
+                    </ion-col>
+                    <ion-col>
+                      <button ion-button class="submit-btn" full type="submit"
+                        [disabled]="!couponCodeForm.form.valid">Subscribe
+                      </button>
+
+                    </ion-col>
                   </ion-row>
-                </form>
-            </ion-card>
-            
-            <!-- <ion-card *ngIf="!showForm">
+                </ion-grid>
+              </form>
+
+              <ion-grid style="height: 100%">
+                <ion-row justify-content-center align-items-center style="height: 100%">
+                  <button ion-button class="submit-btn" full type="submit"
+                    [disabled]="!newStudentForm.form.valid">Subscribe
+                  </button>
+                </ion-row>
+              </ion-grid>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-card>
+
+    <!-- <ion-card *ngIf="!showForm">
               <ion-item>
                 <ion-label text-wrap *ngIf="!emailVerfied"> Check your Email and verify it by clicking the link provided in Email. </ion-label>
               </ion-item>
             </ion-card> -->
-          </ion-content>
-        </ion-content>
-        
-     
+  </div>
+</ion-content>

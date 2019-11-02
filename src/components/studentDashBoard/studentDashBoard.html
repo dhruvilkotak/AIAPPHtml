@@ -1,86 +1,84 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Existing Students</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-        <ion-grid style="height: 10%">
-                <ion-row justify-content-center align-items-center style="height: 100%">
-                        <h3> {{studentObject.studentData.firstName}}  {{studentObject.studentData.lastName}} </h3>
-                </ion-row>
-              </ion-grid>
-   </ion-content>
-  
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Existing Students</ion-title>
+  </ion-navbar>
+</ion-header>
 
-    <ion-content has-header="true" padding="true"  ng-controller="AppCtrl as ctrl" >
-      <!-- <div class="ion-content" style=" padding-top: 20%" *ngIf="beginAssessmentDone">
-       -->
-      <div class="ion-content"   style=" padding-top: 10%">
-        <ion-grid style="height: 100%">
-          
-          <ion-row justify-content-center align-items-center style="height: 100%">
-              <button ion-button class="submit-btn" full (click)="viewAssessment()">Pre Assessment</button>
+<ion-content padding>
+  <ion-grid style="height: 10%">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <h3> {{studentObject.studentData.firstName}} {{studentObject.studentData.lastName}} </h3>
+    </ion-row>
+  </ion-grid>
+  <div col-md-6 col-lg-6 col-xl-6 has-header="true" padding="true" ng-controller="AppCtrl as ctrl" class="margin-auto">
+    <!-- <div class="ion-content" style=" padding-top: 20%" *ngIf="beginAssessmentDone">
+         -->
+    <div class="ion-content" style=" padding-top: 10%">
+      <ion-grid style="height: 100%">
+
+        <ion-row justify-content-center align-items-center style="height: 100%">
+          <button ion-button class="submit-btn" full (click)="viewAssessment()">Pre Assessment</button>
         </ion-row>
-       
+
         <ion-row justify-content-center align-items-center style="height: 100%">
           <button ion-button class="submit-btn" full (click)="doPostAssessment()">Post Assessment</button>
-          </ion-row>
-       
-        </ion-grid>
-        <ion-card>
-          <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar> -->
-          <div *ngIf="error" class="error-message">{{error}}</div>
-          <ion-item>
-            <ion-label text-wrap >Word Type : </ion-label>
-            <ion-label text-wrap *ngIf ="isWord" >Words</ion-label>
-            <ion-label text-wrap *ngIf ="!isWord" >Math Facts</ion-label> 
-            <ion-toggle [(ngModel)]="isWord" (ionChange)="changeWordType()" [ngModelOptions]="{standalone: true}">
-            </ion-toggle>
-           
-          </ion-item>
-          <ion-item style="text-align: center;">
-            
-              <ion-row class="ion-title" >
-                  <ion-col style="background-color: silver;">Pre Intervention Results:</ion-col>
-                  <ion-col (click)="viewStudentWords()" style="color: blue" >{{knownWordLength}} Known / {{unKnownWordLength}} Unknown / {{newLearnedWordLength}} Learned Word / {{learningWordsLength}} Learning Words </ion-col>
-              </ion-row>
-          </ion-item>
-          <br>
-          
-            <ion-item style="text-align: center;" *ngIf="knownWordLength || unKnownWordLength ">
-                <ion-row class="ion-title" style="background-color: silver;">
-                    <ion-col >Intervention Test</ion-col>
-                    <ion-col >Progress</ion-col>
-                    
-                  </ion-row>
-                  <ion-item *ngFor="let methodObject of methodObjectArray"  style="text-align: center;">
-                      <ion-row  >
-                          <ion-col style="color: blue" (click)="startInterventionTest(methodObject.methodIndex)" >{{methodObject.methodName}}</ion-col>
+        </ion-row>
 
-                          <ion-col *ngIf="methodObject.sessionsArray">{{methodObject.sessionsArray.length}}</ion-col>
-                          <ion-col *ngIf="!methodObject.sessionsArray">0</ion-col>
-                          
-                      
-                      </ion-row>
-                    </ion-item>
-            </ion-item>
-        </ion-card>
-      </div>
+      </ion-grid>
+      <ion-card>
+        <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar> -->
+        <div *ngIf="error" class="error-message">{{error}}</div>
+        <ion-item>
+          <ion-label text-wrap>Word Type : </ion-label>
+          <ion-label text-wrap *ngIf="isWord">Words</ion-label>
+          <ion-label text-wrap *ngIf="!isWord">Math Facts</ion-label>
+          <ion-toggle [(ngModel)]="isWord" (ionChange)="changeWordType()" [ngModelOptions]="{standalone: true}">
+          </ion-toggle>
 
-      <!-- <div class="ion-content" *ngIf="!beginAssessmentDone"  style=" padding-top: 10%">
-        <ion-grid style="height: 100%">
-          <ion-row>
-              No Data Available : This student has not yet completed the Known/Unknown Item Assessment. 
+        </ion-item>
+        <ion-item style="text-align: center;">
+
+          <ion-row class="ion-title">
+            <ion-col style="background-color: silver;">Pre Intervention Results:</ion-col>
+            <ion-col (click)="viewStudentWords()" style="color: blue">{{knownWordLength}} Known / {{unKnownWordLength}}
+              Unknown / {{newLearnedWordLength}} Learned Word / {{learningWordsLength}} Learning Words </ion-col>
           </ion-row>
-          <ion-row justify-content-center align-items-center style="height: 100%">
-                  <button ion-button class="submit-btn" full (click)="beginAssessment()">Begin Assessment</button>
+        </ion-item>
+        <br>
+
+        <ion-item style="text-align: center;" *ngIf="knownWordLength || unKnownWordLength ">
+          <ion-row class="ion-title" style="background-color: silver;">
+            <ion-col>Intervention Test</ion-col>
+            <ion-col>Progress</ion-col>
+
+          </ion-row>
+          <ion-item *ngFor="let methodObject of methodObjectArray" style="text-align: center;">
+            <ion-row>
+              <ion-col style="color: blue" (click)="startInterventionTest(methodObject.methodIndex)">
+                {{methodObject.methodName}}</ion-col>
+
+              <ion-col *ngIf="methodObject.sessionsArray">{{methodObject.sessionsArray.length}}</ion-col>
+              <ion-col *ngIf="!methodObject.sessionsArray">0</ion-col>
+
+
             </ion-row>
-        </ion-grid>
-      </div> -->
-    </ion-content>
+          </ion-item>
+        </ion-item>
+      </ion-card>
+    </div>
 
-  
+    <!-- <div class="ion-content" *ngIf="!beginAssessmentDone"  style=" padding-top: 10%">
+          <ion-grid style="height: 100%">
+            <ion-row>
+                No Data Available : This student has not yet completed the Known/Unknown Item Assessment. 
+            </ion-row>
+            <ion-row justify-content-center align-items-center style="height: 100%">
+                    <button ion-button class="submit-btn" full (click)="beginAssessment()">Begin Assessment</button>
+              </ion-row>
+          </ion-grid>
+        </div> -->
+  </div>
+</ion-content>

@@ -1,65 +1,65 @@
-  
-   <ion-header>
-      <ion-navbar>
-        <ion-title>
-          {{methodTitle}}
-        </ion-title>
-      </ion-navbar>
-    </ion-header> 
-  
-    <ion-content has-header="true" padding="true"  ng-controller="AppCtrl as ctrl" >
-      <div *ngIf="error" class="error-message">{{error}}</div>
-      <ion-content padding="'true'" scroll="false" class="has-header">
-          <div class="ion-content"  >
-         
-              <ion-row>
-                  <ion-col>
-                    <ion-list inset>
-                      <ion-item *ngIf="methodIndex == 0">
-                          <ion-label text-wrap text-wrap>Number of Known Words </ion-label>
-                          <ion-input type="number" [(ngModel)]="ratio1" min="{{minRatio1}}" max="{{maxRatio1}}"  (ionChange)="updateOTR()"></ion-input>
-                        </ion-item>
-                      <ion-item *ngIf="methodIndex == 2">
-                          <ion-label text-wrap text-wrap> Number of cycle </ion-label>
-                          <ion-input type="number" [(ngModel)]="ratio1" (ionChange)="updateOTR()"></ion-input>
-                        </ion-item>
-                        <ion-item *ngIf="methodIndex == 3">
-                          <ion-label text-wrap text-wrap>Number of cycle </ion-label>
-                          <ion-input type="number" [(ngModel)]="ratio1" (ionChange)="updateOTR()" disabled="true"></ion-input>
-                        </ion-item>
-                        <ion-item *ngIf="methodIndex == 1">
-                            <ion-label text-wrap text-wrap>Number of Known Words </ion-label>
-                            <ion-input type="number" [(ngModel)]="ratio1" min="{{minRatio1}}" max="{{maxRatio1}}" disabled="true" (ionChange)="updateOTR()"></ion-input>
-                          </ion-item>
-                      <ion-item>
-                          <ion-label text-wrap text-wrap>Number of Unknown Words </ion-label>
-                          <ion-input type="number" [(ngModel)]="ratio2" min="{{minRatio2}}" max="{{maxRatio2}}" (ionChange)="updateRatio1()"></ion-input>
-                      </ion-item>
-                      <ion-item *ngIf="methodIndex == 1">
-                        <ion-label text-wrap text-wrap>Total Opportunity to Respond </ion-label>
-                        <ion-input type="number" [(ngModel)]="OTR"  (ionChange)="updateOTR()"></ion-input>
-                      </ion-item>
-                      <ion-item *ngIf="methodIndex != 1">
-                          <ion-label text-wrap text-wrap>Total Opportunity to Respond </ion-label>
-                          <ion-input type="number" [(ngModel)]="OTR" disabled="true" (ionChange)="updateOTR()"></ion-input>
-                        </ion-item>
-                    </ion-list>
-      
-                  </ion-col>
-                </ion-row>
-          </div> 
-          <div class="ion-content"  >
-              <ion-grid style="height: 30%">
-                <ion-row justify-content-center align-items-center style="height: 100%">
-                  <ion-col>
-                      <button ion-button class="submit-btn"  (click)="updateRatio()">Change </button>
-                  </ion-col>
-                  <ion-col>
-                      <button ion-button class="submit-btn"  (click)="dismiss()">Cancel</button>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </div>
-        </ion-content>
-  </ion-content>
-  
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{methodTitle}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content has-header="true" padding="true" ng-controller="AppCtrl as ctrl">
+  <div *ngIf="error" class="error-message">{{error}}</div>
+  <div col-md-6 col-lg-6 col-xl-6 padding="'true'" scroll="false" class="has-header margin-auto">
+    <div class="ion-content">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            <ion-item *ngIf="methodIndex == 0">
+              <ion-label text-wrap text-wrap>Number of Known Words </ion-label>
+              <ion-input type="number" [(ngModel)]="ratio1" min="{{minRatio1}}" max="{{maxRatio1}}"
+                (ionChange)="updateOTR()"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="methodIndex == 2">
+              <ion-label text-wrap text-wrap> Number of cycle </ion-label>
+              <ion-input type="number" [(ngModel)]="ratio1" (ionChange)="updateOTR()"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="methodIndex == 3">
+              <ion-label text-wrap text-wrap>Number of cycle </ion-label>
+              <ion-input type="number" [(ngModel)]="ratio1" (ionChange)="updateOTR()" disabled="true"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="methodIndex == 1">
+              <ion-label text-wrap text-wrap>Number of Known Words </ion-label>
+              <ion-input type="number" [(ngModel)]="ratio1" min="{{minRatio1}}" max="{{maxRatio1}}" disabled="true"
+                (ionChange)="updateOTR()"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label text-wrap text-wrap>Number of Unknown Words </ion-label>
+              <ion-input type="number" [(ngModel)]="ratio2" min="{{minRatio2}}" max="{{maxRatio2}}"
+                (ionChange)="updateRatio1()"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="methodIndex == 1">
+              <ion-label text-wrap text-wrap>Total Opportunity to Respond </ion-label>
+              <ion-input type="number" [(ngModel)]="OTR" (ionChange)="updateOTR()"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="methodIndex != 1">
+              <ion-label text-wrap text-wrap>Total Opportunity to Respond </ion-label>
+              <ion-input type="number" [(ngModel)]="OTR" disabled="true" (ionChange)="updateOTR()"></ion-input>
+            </ion-item>
+          </ion-list>
+
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="ion-content">
+      <ion-grid style="height: 30%">
+        <ion-row justify-content-center align-items-center style="height: 100%">
+          <ion-col>
+            <button ion-button class="submit-btn" (click)="updateRatio()">Change </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button class="submit-btn" (click)="dismiss()">Cancel</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

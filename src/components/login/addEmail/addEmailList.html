@@ -5,72 +5,69 @@
     </button>
     <ion-title>User Email List</ion-title>
   </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
+</ion-header>
+
+<ion-content padding>
   <ion-grid style="height: 10%">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3 > View User Email : </h3>
+      <h3> View User Email : </h3>
     </ion-row>
   </ion-grid>
-  
-  
+
+
   <div *ngIf="error" class="error-message">{{error}}</div>
 
-  <ion-content padding="'true'" scroll="false" class="has-header">
-      <ion-card>
-        
-          <form class="list" #newStudentForm="ngForm" (ngSubmit)="addNewEmail()">
-              <ion-row>
-                  <ion-col>
-                    <ion-list inset>
-              
-                      <ion-item>
-                        <ion-label text-wrap >Email ID : </ion-label>
-                        <ion-input name="newEmailId" required [(ngModel)]="newEmailId" type="email"></ion-input>
-                      </ion-item>
-                        
-                        <ion-grid style="height: 100%">
-                            <ion-row justify-content-center align-items-center style="height: 100%">
-                                  <button ion-button class="submit-btn" full type="submit" [disabled]="!newStudentForm.form.valid">Add Email 
-                                  </button>
-                            </ion-row>
-                        </ion-grid>
-        
-                  </ion-list>
-              </ion-col>
-              </ion-row>
-            </form>
-  
-        <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar>
-          <ion-item  >
+  <div col-md-6 col-lg-6 col-xl-6 padding="'true'" scroll="false" class="has-header margin-auto">
+    <ion-card>
+      <form class="list" #newStudentForm="ngForm" (ngSubmit)="addNewEmail()">
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
 
-              <ion-row class="ion-title" style="background-color: silver;">
-                  <ion-col >Email ID</ion-col>
-                  <ion-col ></ion-col>
-                  <ion-col ></ion-col>
-                  
+              <ion-item>
+                <ion-label text-wrap>Email ID : </ion-label>
+                <ion-input name="newEmailId" required [(ngModel)]="newEmailId" type="email"></ion-input>
+              </ion-item>
+
+              <ion-grid style="height: 100%">
+                <ion-row justify-content-center align-items-center style="height: 100%">
+                  <button ion-button class="submit-btn" full type="submit" [disabled]="!newStudentForm.form.valid">Add
+                    Email
+                  </button>
                 </ion-row>
-                <ion-item *ngFor="let emailIdObj of userEmailList">
-                    <ion-row  >
-                        <ion-col >{{emailIdObj}}</ion-col>
-                        <ion-col >
-                          <ion-item (click)="sendEmailIdConfirm(emailIdObj,organizationDetails.schoolCode)"  style="color: blue">
-                              Send Invitation Email
-                          </ion-item>
-                        </ion-col>
+              </ion-grid>
 
-                        <ion-col >
-                          <ion-item (click)="removeEmailId(emailIdObj)"  style="color: blue">
-                              Remove Email
-                          </ion-item>
-                        </ion-col>
-                    
-                    </ion-row>
-                  </ion-item>
-          </ion-item>
-        
-      </ion-card>
-    </ion-content>
-  </ion-content>
-  
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </form>
+
+      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar>
+      <ion-item>
+
+        <ion-row class="ion-title" style="background-color: silver;">
+          <ion-col>Email ID</ion-col>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+
+        </ion-row>
+        <ion-item *ngFor="let emailIdObj of userEmailList">
+          <ion-row>
+            <ion-col>{{emailIdObj}}</ion-col>
+            <ion-col>
+              <ion-item (click)="sendEmailIdConfirm(emailIdObj,organizationDetails.schoolCode)" style="color: blue">
+                Send Invitation Email
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item (click)="removeEmailId(emailIdObj)" style="color: blue">
+                Remove Email
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

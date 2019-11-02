@@ -1,55 +1,57 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>
-        Login
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
-  <ion-content padding center text-center>
-      <ion-card>
-<!-- 
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card col-md-6 col-lg-6 col-xl-6 class="margin-auto">
+    <!-- 
           <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="sessionDate"></ion-datetime> -->
 
-          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-        <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-          <ion-row>
-            <ion-col>
-              <ion-list inset>
-                <ion-item>
-                  <ion-input placeholder="Email ID" name="emailID" id="loginField" type="text" required [(ngModel)]="emailID" #email></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-input placeholder="Password" [type]="passwordType[0]" name="password" id="passwordField" required [(ngModel)]="password"></ion-input>
-                  <ion-icon item-end [name]="passwordIcon[0]" class="passwordIcon" (click)='hideShowPassword(0)'></ion-icon>
-                 
-                </ion-item>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            <ion-item>
+              <ion-input placeholder="Email ID" name="emailID" id="loginField" type="text" required
+                [(ngModel)]="emailID" #email></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Password" [type]="passwordType[0]" name="password" id="passwordField" required
+                [(ngModel)]="password"></ion-input>
+              <ion-icon item-end [name]="passwordIcon[0]" class="passwordIcon" (click)='hideShowPassword(0)'></ion-icon>
 
-              </ion-list>
+            </ion-item>
 
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-                <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login
-                  </button>
-       
-              <ion-item  style="color: blue">
-                
-                <ion-label text-wrap (click)="createOrganizationAccount()">Create Organization Account !  </ion-label>
-              </ion-item>
+          </ion-list>
 
-              <ion-item  style="color: blue">
-                
-                  <ion-label text-wrap (click)="signUpFaculty()">Sign Up as a Faculty ! </ion-label>
-                </ion-item>
-              <ion-item  style="color: blue">
-                <ion-label text-wrap (click)="forgetPassword()">Forget Password </ion-label>
-              </ion-item>
-              
-           
-              
-            </ion-col>
-          </ion-row>
-        </form>
-    </ion-card>
-  </ion-content>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login
+          </button>
+
+          <ion-item style="color: blue">
+
+            <ion-label text-wrap (click)="createOrganizationAccount()">Create Organization Account ! </ion-label>
+          </ion-item>
+
+          <ion-item style="color: blue">
+
+            <ion-label text-wrap (click)="signUpFaculty()">Sign Up as a Faculty ! </ion-label>
+          </ion-item>
+          <ion-item style="color: blue">
+            <ion-label text-wrap (click)="forgetPassword()">Forget Password </ion-label>
+          </ion-item>
+
+
+
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card>
+</ion-content>

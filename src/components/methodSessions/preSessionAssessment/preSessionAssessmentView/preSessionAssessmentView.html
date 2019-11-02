@@ -15,7 +15,7 @@
   </ion-grid>
 
   <div *ngIf="error" class="error-message">{{error}}</div>
-  <ion-content padding="'true'" scroll="false" class="has-header">
+  <div col-sm-12 col-md-8 col-lg-8 col-xl-8 padding="'true'" scroll="false" class="has-header margin-auto">
     <ion-card align-items-center>
 
       <ion-item *ngIf="sessionCounter > 0 " align-items-center>
@@ -36,7 +36,6 @@
             <ion-col *ngIf="sessionCounter > 1 ">{{preSessionWordDataObj.notes}}</ion-col>
           </ion-row>
         </ion-item>
-
       </ion-item>
 
       <ion-item justify-content-center align-items-center>
@@ -53,11 +52,7 @@
             <ion-col align-items-center> {{wordDataObj.wordText}}</ion-col>
           </ion-col>
         </ion-row>
-
       </ion-item>
-
     </ion-card>
-
-
-  </ion-content>
+  </div>
 </ion-content>
