@@ -10,73 +10,44 @@
 <ion-content padding>
   <ion-grid style="height: 10%">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3>Add Word/MathFact Details :</h3>
+      <h3> Add Word/MathFact Details : </h3>
     </ion-row>
   </ion-grid>
 
+
   <div *ngIf="error" class="error-message">{{error}}</div>
-  <div
-    col-md-6
-    col-lg-6
-    col-xl-6
-    padding="'true'"
-    scroll="false"
-    class="has-header margin-auto"
-  >
+  <div col-md-12 col-lg-12 col-xl-12 padding="'true'" scroll="false" class="has-header margin-auto">
     <ion-card>
+
       <form class="list" #newStudentForm="ngForm" (ngSubmit)="addNewWord()">
+
         <ion-row>
           <ion-col>
             <ion-list inset>
+
               <ion-item>
                 <ion-label text-wrap>Word : </ion-label>
-                <ion-input
-                  name="wordText"
-                  required
-                  [(ngModel)]="wordText"
-                  type="text"
-                ></ion-input>
+                <ion-input name="wordText" required [(ngModel)]="wordText" type="text"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label text-wrap>Word Type : </ion-label>
                 <ion-label text-wrap *ngIf="isWord">Words</ion-label>
                 <ion-label text-wrap *ngIf="!isWord">Math Facts</ion-label>
-                <ion-toggle
-                  [(ngModel)]="isWord"
-                  (ionChange)="changeWordType()"
-                  [ngModelOptions]="{standalone: true}"
-                >
+                <ion-toggle [(ngModel)]="isWord" (ionChange)="changeWordType()" [ngModelOptions]="{standalone: true}">
                 </ion-toggle>
+
               </ion-item>
               <ion-item (click)="selectCateory()" style="color: blue">
                 {{wordCategory}}
               </ion-item>
 
               <ion-grid style="height: 100%">
-                <ion-row
-                  justify-content-center
-                  align-items-center
-                  style="height: 100%"
-                >
-                  <button
-                    ion-button
-                    class="submit-btn"
-                    full
-                    type="submit"
-                    *ngIf="isWord"
-                    [disabled]="!newStudentForm.form.valid"
-                  >
-                    Add Word
+                <ion-row justify-content-center align-items-center style="height: 100%">
+                  <button ion-button class="submit-btn" full type="submit" *ngIf="isWord"
+                    [disabled]="!newStudentForm.form.valid">Add Word
                   </button>
-                  <button
-                    ion-button
-                    class="submit-btn"
-                    full
-                    type="submit"
-                    *ngIf="!isWord"
-                    [disabled]="!newStudentForm.form.valid"
-                  >
-                    Add Math Fact
+                  <button ion-button class="submit-btn" full type="submit" *ngIf="!isWord"
+                    [disabled]="!newStudentForm.form.valid">Add Math Fact
                   </button>
                 </ion-row>
               </ion-grid>

@@ -1,42 +1,36 @@
-import { Component } from "@angular/core";
-import { Storage } from "@ionic/storage";
-import { AlertController, NavController } from "ionic-angular";
-import { OrganizationDetails } from "../../../models/organizationDetails";
-import { User } from "../../../models/user";
+import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { AlertController, NavController } from 'ionic-angular';
+import { OrganizationDetails } from '../../../models/organizationDetails';
+import { User } from '../../../models/user';
+
 
 @Component({
-  selector: "page-addAdminAccess",
-  templateUrl: "addAdminAccess.html"
+  selector: 'page-addAdminAccess',
+  templateUrl: 'addAdminAccess.html'
 })
+
 export class AddAdminAccess {
+
   private allDatauserDetailsList: Array<User> = [new User()];
-  private searchTerm: string = "";
+  private searchTerm: string = '';
   private error: String = "Error Message";
   private userDetailsList: Array<User> = [new User()];
   private userDetails: User = new User();
   private organizationDetails: OrganizationDetails = new OrganizationDetails();
-  constructor(
-    private navCtrl: NavController,
+  constructor(private navCtrl: NavController,
     private alertCtrl: AlertController,
-    private storage: Storage
-  ) {}
+    private storage: Storage) {
+
+  };
 
   filterItems() {
-    this.userDetailsList = this.allDatauserDetailsList.filter(userObject => {
-      return (
-        userObject.firstname
-          .toLowerCase()
-          .indexOf(this.searchTerm.toLowerCase()) > -1 ||
-        userObject.lastname
-          .toLowerCase()
-          .indexOf(this.searchTerm.toLowerCase()) > -1 ||
-        userObject.emailId
-          .toLowerCase()
-          .indexOf(this.searchTerm.toLowerCase()) > -1 ||
-        userObject.userRole
-          .toLowerCase()
-          .indexOf(this.searchTerm.toLowerCase()) > -1
-      );
+
+    this.userDetailsList = this.allDatauserDetailsList.filter((userObject) => {
+      return userObject.firstname.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 ||
+        userObject.lastname.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 ||
+        userObject.emailId.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 ||
+        userObject.userRole.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
     });
     console.log("ion filter enter" + this.allDatauserDetailsList.length);
   }
@@ -53,46 +47,29 @@ export class AddAdminAccess {
   }
 
   onSelectChange(selectedValue: any, index: number) {
-    console.log(
-      "Selected",
-      selectedValue,
-      index,
-      this.allDatauserDetailsList[index].userRole,
-      this.allDatauserDetailsList.length
-    );
+    console.log('Selected', selectedValue, index, this.allDatauserDetailsList[index].userRole, this.allDatauserDetailsList.length);
 
     this.userDetailsList[index].userRole = selectedValue;
-    console.log(
-      "Selected",
-      selectedValue,
-      index,
-      this.allDatauserDetailsList[index].userRole,
-      this.allDatauserDetailsList.length
-    );
+    console.log('Selected', selectedValue, index, this.allDatauserDetailsList[index].userRole, this.allDatauserDetailsList.length);
     //  this.filterItems();
   }
   updateUserConfirm(userObject: User) {
     let alert = this.alertCtrl.create({
-      title: "Update User Role",
-      message:
-        "Do you want to update User " +
-        userObject.emailId +
-        " with user role of " +
-        userObject.userRole +
-        "?",
+      title: 'Update User Role',
+      message: 'Do you want to update User ' + userObject.emailId + ' with user role of ' + userObject.userRole + '?',
       buttons: [
         {
-          text: "Cancel",
-          role: "cancel",
+          text: 'Cancel',
+          role: 'cancel',
           handler: () => {
-            console.log("Cancel clicked");
+            console.log('Cancel clicked');
           }
         },
         {
-          text: "yes",
+          text: 'yes',
           handler: () => {
             //   this.filterItems();
-            console.log("yes clicked");
+            console.log('yes clicked');
           }
         }
       ]
@@ -102,25 +79,26 @@ export class AddAdminAccess {
 
   removeUserConfirm(userObject: User) {
     let alert = this.alertCtrl.create({
-      title: "Remove User",
-      message: "Do you want to remove User " + userObject.emailId + "?",
+      title: 'Remove User',
+      message: 'Do you want to remove User ' + userObject.emailId + '?',
       buttons: [
         {
-          text: "Cancel",
-          role: "cancel",
+          text: 'Cancel',
+          role: 'cancel',
           handler: () => {
-            console.log("Cancel clicked");
+            console.log('Cancel clicked');
           }
         },
         {
-          text: "yes",
+          text: 'yes',
           handler: () => {
             //   this.filterItems();
-            console.log("yes clicked");
+            console.log('yes clicked');
           }
         }
       ]
     });
     alert.present();
   }
+
 }

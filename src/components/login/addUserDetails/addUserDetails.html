@@ -10,175 +10,82 @@
 <ion-content padding>
   <ion-grid style="height: 10%">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3>Add User details :</h3>
+      <h3> Add User details : </h3>
     </ion-row>
   </ion-grid>
 
   <div *ngIf="error" class="error-message">{{error}}</div>
-  <div
-    col-md-6
-    col-lg-6
-    col-xl-6
-    padding="'true'"
-    scroll="false"
-    class="has-header margin-auto"
-  >
+  <div col-md-12 col-lg-12 col-xl-12 padding="'true'" scroll="false" class="has-header margin-auto">
     <ion-card *ngIf="showForm">
       <form class="list" #newStudentForm="ngForm" (ngSubmit)="addUserDetails()">
         <ion-row>
           <ion-col>
             <ion-list inset>
+
               <ion-item>
                 <ion-label text-wrap>School Code (6 digit) : </ion-label>
-                <ion-input
-                  name="schoolcode"
-                  required
-                  [(ngModel)]="schoolcode"
-                  type="text"
-                  (ionChange)="getOrganizationDetails()"
-                  maxlength="6"
-                ></ion-input>
+                <ion-input name="schoolcode" required [(ngModel)]="schoolcode" type="text"
+                  (ionChange)="getOrganizationDetails()" maxlength="6"></ion-input>
               </ion-item>
 
               <ion-item *ngIf="organizationDetails">
                 <ion-label text-wrap>School Address : </ion-label>
-                <ion-input
-                  name="schoolAddress"
-                  required
-                  [(ngModel)]="schoolAddress"
-                  type="text"
-                  disabled="true"
-                >
+                <ion-input name="schoolAddress" required [(ngModel)]="schoolAddress" type="text" disabled="true">
                 </ion-input>
               </ion-item>
 
               <ion-item>
                 <ion-label text-wrap>First Name : </ion-label>
-                <ion-input
-                  name="firstname"
-                  required
-                  [(ngModel)]="firstname"
-                  type="text"
-                ></ion-input>
+                <ion-input name="firstname" required [(ngModel)]="firstname" type="text"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label text-wrap>Last Name : </ion-label>
-                <ion-input
-                  name="lastname"
-                  required
-                  [(ngModel)]="lastname"
-                  type="text"
-                ></ion-input>
+                <ion-input name="lastname" required [(ngModel)]="lastname" type="text"></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label text-wrap>Email ID : </ion-label>
 
-                <ion-input
-                  name="emailId"
-                  required
-                  [(ngModel)]="emailId"
-                  type="email"
-                ></ion-input>
+                <ion-input name="emailId" required [(ngModel)]="emailId" type="email"></ion-input>
+
               </ion-item>
 
               <ion-item>
                 <ion-label text-wrap>Password : </ion-label>
 
-                <ion-input
-                  passwordValidator
-                  name="password"
-                  id="password"
-                  [type]="passwordType[0]"
-                  required
-                  [(ngModel)]="password"
-                  #passwordModel="ngModel"
-                ></ion-input>
-                <ion-icon
-                  item-end
-                  [name]="passwordIcon[0]"
-                  class="passwordIcon"
-                  (click)="hideShowPassword(0)"
-                >
+
+                <ion-input name="password" id="password" [type]="passwordType[0]" required [(ngModel)]="password">
+                </ion-input>
+                <ion-icon item-end [name]="passwordIcon[0]" class="passwordIcon" (click)='hideShowPassword(0)'>
                 </ion-icon>
               </ion-item>
-              <div *ngIf="passwordModel.errors">
-                <ion-item
-                  *ngFor="let errMsg of passwordModel.errors.passwordValidator"
-                >
-                  <div class="error-message">
-                    <ion-icon name="information-circle">{{ errMsg }}</ion-icon>
-                  </div>
-                </ion-item>
-              </div>
+
               <ion-item>
                 <ion-label text-wrap>Re-type Password : </ion-label>
 
-                <ion-input
-                  name="reTypePassword"
-                  [type]="passwordType[1]"
-                  required
-                  [(ngModel)]="reTypePassword"
-                >
+                <ion-input name="reTypePassword" [type]="passwordType[1]" required [(ngModel)]="reTypePassword">
                 </ion-input>
-                <ion-icon
-                  item-end
-                  [name]="passwordIcon[1]"
-                  class="passwordIcon"
-                  (click)="hideShowPassword(1)"
-                >
+                <ion-icon item-end [name]="passwordIcon[1]" class="passwordIcon" (click)='hideShowPassword(1)'>
                 </ion-icon>
+
               </ion-item>
-              <div *ngIf="password != reTypePassword">
-                <ion-item>
-                  <div class="error-message">
-                    <ion-icon name="information-circle">
-                      Re-type Password is not matching the Password.</ion-icon
-                    >
-                  </div>
-                </ion-item>
-              </div>
               <ion-item>
                 <ion-label text-wrap>Security Question : </ion-label>
-                <ion-input
-                  name="securityQuestion"
-                  required
-                  [(ngModel)]="securityQuestion"
-                  type="text"
-                ></ion-input>
+                <ion-input name="securityQuestion" required [(ngModel)]="securityQuestion" type="text"></ion-input>
               </ion-item>
 
               <ion-item>
                 <ion-label text-wrap>Answer : </ion-label>
 
-                <ion-input
-                  name="answer"
-                  [type]="passwordType[2]"
-                  required
-                  [(ngModel)]="answer"
-                ></ion-input>
-                <ion-icon
-                  item-end
-                  [name]="passwordIcon[2]"
-                  class="passwordIcon"
-                  (click)="hideShowPassword(2)"
-                >
+                <ion-input name="answer" [type]="passwordType[2]" required [(ngModel)]="answer"></ion-input>
+                <ion-icon item-end [name]="passwordIcon[2]" class="passwordIcon" (click)='hideShowPassword(2)'>
                 </ion-icon>
+
               </ion-item>
 
               <ion-grid style="height: 100%">
-                <ion-row
-                  justify-content-center
-                  align-items-center
-                  style="height: 100%"
-                >
-                  <button
-                    ion-button
-                    class="submit-btn"
-                    full
-                    type="submit"
-                    [disabled]="(!newStudentForm.form.valid) || (password != reTypePassword)"
-                  >
-                    Add User
+                <ion-row justify-content-center align-items-center style="height: 100%">
+                  <button ion-button class="submit-btn" full type="submit" [disabled]="!newStudentForm.form.valid">Add
+                    User
                   </button>
                 </ion-row>
               </ion-grid>
@@ -190,9 +97,8 @@
 
     <ion-card *ngIf="!showForm">
       <ion-item>
-        <ion-label text-wrap *ngIf="!emailVerfied">
-          Check your Email and verify it by clicking the link provided in Email.
-        </ion-label>
+        <ion-label text-wrap *ngIf="!emailVerfied"> Check your Email and verify it by clicking the link provided in
+          Email. </ion-label>
       </ion-item>
     </ion-card>
   </div>

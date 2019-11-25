@@ -8,12 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button
-      ion-item
-      *ngFor="let item of items"
-      (click)="itemTapped($event, item)"
-    >
+  <ion-list col-md-12 col-lg-12 col-xl-12 class="margin-auto">
+    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon [name]="item.icon" item-start></ion-icon>
       {{item.title}}
       <div class="item-note" item-end>

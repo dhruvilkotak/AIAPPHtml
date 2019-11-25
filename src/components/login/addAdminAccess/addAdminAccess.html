@@ -10,29 +10,23 @@
 <ion-content padding>
   <ion-grid style="height: 10%">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3>View User Email :</h3>
+      <h3> View User Email : </h3>
     </ion-row>
   </ion-grid>
 
+
   <div *ngIf="error" class="error-message">{{error}}</div>
 
-  <div
-    col-md-6
-    col-lg-6
-    col-xl-6
-    padding="'true'"
-    scroll="false"
-    class="has-header margin-auto"
-  >
+  <div col-md-12 col-lg-12 col-xl-12 padding="'true'" scroll="false" class="has-header margin-auto">
     <ion-card>
-      <ion-searchbar
-        [(ngModel)]="searchTerm"
-        (ionInput)="filterItems()"
-      ></ion-searchbar>
+
+      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()"></ion-searchbar>
       <ion-item>
+
         <ion-row class="ion-title" style="background-color: silver;">
           <ion-col>Email ID</ion-col>
           <ion-col></ion-col>
+
         </ion-row>
         <ion-item *ngFor="let userObject of userDetailsList;let i=index">
           <ion-row>
@@ -41,40 +35,31 @@
             <ion-col>
               <ion-item>
                 <ion-select required (ionChange)="onSelectChange($event,i)">
-                  <ion-option
-                    value="faculty"
-                    [selected]="userObject.userRole == 'faculty'"
-                    >faculty</ion-option
-                  >
-                  <ion-option
-                    value="OrganizationAdmin"
-                    [selected]="userObject.userRole == 'OrganizationAdmin'"
-                    >admin
+                  <ion-option value="faculty" [selected]="userObject.userRole == 'faculty'">faculty</ion-option>
+                  <ion-option value="OrganizationAdmin" [selected]="userObject.userRole == 'OrganizationAdmin'">admin
                   </ion-option>
                 </ion-select>
+
               </ion-item>
             </ion-col>
 
             <ion-col>
-              <ion-item
-                (click)="updateUserRole(userObject)"
-                style="color: blue"
-              >
+              <ion-item (click)="updateUserRole(userObject)" style="color: blue">
+
                 Update User Role
               </ion-item>
             </ion-col>
 
             <ion-col>
-              <ion-item
-                (click)="removeUserDetails(userObject)"
-                style="color: blue"
-              >
+              <ion-item (click)="removeUserDetails(userObject)" style="color: blue">
+
                 Remove User
               </ion-item>
             </ion-col>
           </ion-row>
         </ion-item>
       </ion-item>
+
     </ion-card>
   </div>
 </ion-content>

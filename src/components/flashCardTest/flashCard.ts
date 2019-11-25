@@ -1,19 +1,21 @@
-import { Component } from "@angular/core";
-import { File } from "@ionic-native/file";
-import { WordData } from "../../models/wordData";
-import { Student } from "../../models/student";
-import { WordServices } from "../../services/wordServices";
-import { NavController, NavParams, ViewController } from "ionic-angular";
-import { Storage } from "@ionic/storage";
-import { ArrayService } from "../../services/arrayService";
-import { TextToSpeech } from "@ionic-native/text-to-speech";
-import { OrganizationDetails } from "../../models/organizationDetails";
-import { FlashcardService } from "../../services/flashcardService";
+import { Component } from '@angular/core';
+import { File } from '@ionic-native/file';
+import { WordData } from '../../models/wordData';
+import { Student } from '../../models/student';
+import { WordServices } from '../../services/wordServices';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { ArrayService } from '../../services/arrayService';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { OrganizationDetails } from '../../models/organizationDetails';
+import { FlashcardService } from '../../services/flashcardService';
 
 @Component({
-  selector: "page-blueflashcard",
-  templateUrl: "../../htmlpages/blueflashcard/blueflashcard.html"
+  selector: 'page-blueflashcard',
+  templateUrl: '../../htmlpages/blueflashcard/blueflashcard.html'
 })
+
+
 export class FlashCard {
   private wordDataObject: WordData = new WordData();
   private wordDataArray: Array<WordData> = [new WordData(), new WordData()];
@@ -38,99 +40,55 @@ export class FlashCard {
     console.log("onviewdidload");
   }
 
-  constructor(
-    private file: File,
+  constructor(private file: File,
     public navCtrl: NavController,
     private navParams: NavParams,
     private viewCtrl: ViewController,
     private storage: Storage,
-    private tts: TextToSpeech
-  ) {
+    private tts: TextToSpeech) {
+
+
     this.TestTitle = "Assessment Test " + this.testIndex;
 
-    console.log(
-      "test:" + this.TestTitle + "  index:" + this.studentDataSetRecordIndex
-    );
+    console.log("test:" + this.TestTitle + "  index:" + this.studentDataSetRecordIndex);
 
-    this.wordDataArray = this.arrayServiceObj.shuffle(
-      this.studentObject.studentWordDetailsArray[this.wordType]
-        .studentDatasetRecordList[this.studentDataSetRecordIndex].datasetObject
-        .wordList
-    );
+    this.wordDataArray = this.arrayServiceObj.shuffle(this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].datasetObject.wordList);
     this.totalCardNumber = this.wordDataArray.length;
-    this.studentObject.studentWordDetailsArray[
-      this.wordType
-    ].studentDatasetRecordList[
-      this.studentDataSetRecordIndex
-    ].assessmentDataArrayObject[
-      this.testIndex
-    ].totalWordList = this.wordDataArray.length;
-    console.log(
-      "len: " + this.totalCardNumber + "  d:" + this.wordDataArray.length
-    );
+    this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].totalWordList = this.wordDataArray.length;
+    console.log("len: " + this.totalCardNumber + "  d:" + this.wordDataArray.length);
 
     if (this.totalCardNumber > 0) {
-      this.studentObject.studentWordDetailsArray[
-        this.wordType
-      ].studentDatasetRecordList[
-        this.studentDataSetRecordIndex
-      ].assessmentDataArrayObject[this.testIndex].unknownWordList = [];
-      this.studentObject.studentWordDetailsArray[
-        this.wordType
-      ].studentDatasetRecordList[
-        this.studentDataSetRecordIndex
-      ].assessmentDataArrayObject[this.testIndex].knownWordList = [];
+      this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].unknownWordList = [];
+      this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].knownWordList = [];
       this.currentCardNumber = 1;
       this.wordDataObject = this.wordDataArray[this.currentCardNumber - 1];
       this.convertTextToMath(this.wordDataObject.wordText);
+
     }
+
+
   }
   greenCircleClick() {
     this.showAnswer = false;
-    this.studentObject.studentWordDetailsArray[
-      this.wordType
-    ].studentDatasetRecordList[
-      this.studentDataSetRecordIndex
-    ].assessmentDataArrayObject[this.testIndex].knownWordList.push(
-      this.wordDataObject
-    );
+    this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].knownWordList.push(this.wordDataObject);
     if (this.currentCardNumber + 1 <= this.wordDataArray.length) {
       this.wordDataObject = this.wordDataArray[this.currentCardNumber];
       this.convertTextToMath(this.wordDataObject.wordText);
       this.currentCardNumber++;
-    } else {
+    }
+    else {
       console.log("else:green");
-      this.studentObject.studentWordDetailsArray[
-        this.wordType
-      ].studentDatasetRecordList[
-        this.studentDataSetRecordIndex
-      ].assessmentDataArrayObject[this.testIndex].testStatus = true;
+      this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].testStatus = true;
       if (this.testIndex > 0) {
         var known2Len = 0;
         var known1Len = 0;
-        if (
-          this.studentObject.studentWordDetailsArray[this.wordType]
-            .studentDatasetRecordList[this.studentDataSetRecordIndex]
-            .assessmentDataArrayObject[this.testIndex].knownWordList != null
-        )
-          known2Len = this.studentObject.studentWordDetailsArray[this.wordType]
-            .studentDatasetRecordList[this.studentDataSetRecordIndex]
-            .assessmentDataArrayObject[this.testIndex].knownWordList.length;
+        if (this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].knownWordList != null)
+          known2Len = this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].knownWordList.length;
 
-        if (
-          this.studentObject.studentWordDetailsArray[this.wordType]
-            .studentDatasetRecordList[this.studentDataSetRecordIndex]
-            .assessmentDataArrayObject[this.testIndex - 1].knownWordList != null
-        )
-          known1Len = this.studentObject.studentWordDetailsArray[this.wordType]
-            .studentDatasetRecordList[this.studentDataSetRecordIndex]
-            .assessmentDataArrayObject[this.testIndex - 1].knownWordList.length;
+        if (this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex - 1].knownWordList != null)
+          known1Len = this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex - 1].knownWordList.length;
 
-        this.studentObject.studentWordDetailsArray[
-          this.wordType
-        ].studentDatasetRecordList[
-          this.studentDataSetRecordIndex
-        ].assessmentDataArrayObject[this.testIndex].consistancyPercentage =
+        this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].consistancyPercentage =
           known2Len - known1Len;
       }
       this.goBackToView(this.studentObject);
@@ -138,59 +96,37 @@ export class FlashCard {
   }
   redCircleClick() {
     this.showAnswer = false;
-    this.studentObject.studentWordDetailsArray[
-      this.wordType
-    ].studentDatasetRecordList[
-      this.studentDataSetRecordIndex
-    ].assessmentDataArrayObject[this.testIndex].unknownWordList.push(
-      this.wordDataObject
-    );
+    this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].unknownWordList.push(this.wordDataObject)
     if (this.currentCardNumber + 1 <= this.wordDataArray.length) {
       this.wordDataObject = this.wordDataArray[this.currentCardNumber];
       this.convertTextToMath(this.wordDataObject.wordText);
       this.currentCardNumber++;
-    } else {
+    }
+    else {
       console.log("else:red");
-      this.studentObject.studentWordDetailsArray[
-        this.wordType
-      ].studentDatasetRecordList[
-        this.studentDataSetRecordIndex
-      ].assessmentDataArrayObject[this.testIndex].testStatus = true;
+      this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].testStatus = true;
       if (this.testIndex > 0) {
         var known2Len = 0;
         var known1Len = 0;
-        if (
-          this.studentObject.studentWordDetailsArray[this.wordType]
-            .studentDatasetRecordList[this.studentDataSetRecordIndex]
-            .assessmentDataArrayObject[this.testIndex].knownWordList != null
-        )
-          known2Len = this.studentObject.studentWordDetailsArray[this.wordType]
-            .studentDatasetRecordList[this.studentDataSetRecordIndex]
-            .assessmentDataArrayObject[this.testIndex].knownWordList.length;
+        if (this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].knownWordList != null)
+          known2Len = this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].knownWordList.length;
 
-        if (
-          this.studentObject.studentWordDetailsArray[this.wordType]
-            .studentDatasetRecordList[this.studentDataSetRecordIndex]
-            .assessmentDataArrayObject[this.testIndex - 1].knownWordList != null
-        )
-          known1Len = this.studentObject.studentWordDetailsArray[this.wordType]
-            .studentDatasetRecordList[this.studentDataSetRecordIndex]
-            .assessmentDataArrayObject[this.testIndex - 1].knownWordList.length;
+        if (this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex - 1].knownWordList != null)
+          known1Len = this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex - 1].knownWordList.length;
 
-        this.studentObject.studentWordDetailsArray[
-          this.wordType
-        ].studentDatasetRecordList[
-          this.studentDataSetRecordIndex
-        ].assessmentDataArrayObject[this.testIndex].consistancyPercentage =
+        this.studentObject.studentWordDetailsArray[this.wordType].studentDatasetRecordList[this.studentDataSetRecordIndex].assessmentDataArrayObject[this.testIndex].consistancyPercentage =
           known2Len - known1Len;
       }
       this.goBackToView(this.studentObject);
     }
   }
-  goBackToView(studentObject: Student) {}
+  goBackToView(studentObject: Student) {
+
+  }
 
   textToSpeechWordData(text: string) {
-    this.flashcardService.textToSpeechWordData(text, this.tts, this.showAnswer);
+    this.flashcardService.textToSpeechWordData(text, this.tts, this.showAnswer)
+
   }
 
   getAnswer(equation: string) {
@@ -202,9 +138,8 @@ export class FlashCard {
   }
 
   convertTextToMath(mathString: String) {
-    var convertTextToMathResult = this.flashcardService.convertTextToMath(
-      mathString
-    );
+
+    var convertTextToMathResult = this.flashcardService.convertTextToMath(mathString);
     this.result = convertTextToMathResult.result;
     this.operation = convertTextToMathResult.operation;
     this.number1 = convertTextToMathResult.number1;

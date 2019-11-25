@@ -8,32 +8,22 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Welcome : {{userDetails.firstname}} {{userDetails.lastname}} ,</h3>
-  <div
-    col-md-6
-    col-lg-6
-    col-xl-6
-    has-header="true"
-    padding="true"
-    ng-controller="AppCtrl as ctrl"
-    class="margin-auto"
-  >
+  <h3> Welcome : {{userDetails.firstname}} {{userDetails.lastname}} ,</h3>
+  <div col-md-12 col-lg-12 col-xl-12 has-header="true" padding="true" ng-controller="AppCtrl as ctrl"
+    class="margin-auto">
     <div style=" padding-top: 25%">
       <div class="row row-center">
         <div class="col col-center">
-          <button ion-button (click)="addNewUserEmail()" block>
-            Add New User Email
-          </button>
+          <button ion-button (click)="addNewUserEmail()" block> Add New User Email </button>
         </div>
       </div>
 
       <div class="row row-center">
         <div class="col col-center">
-          <button ion-button (click)="updateRegisteredUser()" block>
-            Update User Role
-          </button>
+          <button ion-button (click)="updateRegisteredUser()" block>Update User Role</button>
         </div>
       </div>
+
     </div>
   </div>
 </ion-content>

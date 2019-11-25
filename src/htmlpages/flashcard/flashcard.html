@@ -7,40 +7,32 @@
 <ion-content padding>
   <ion-grid style="height: 50%;padding-top: 10%;" *ngIf="result.length != 2">
     <ion-row justify-content-center align-items-center style="height: 100%">
-      <h3 style="font-size: 150px;">{{wordDataObject.wordText}}</h3>
+      <h3 style="font-size: 150px;"> {{wordDataObject.wordText}} </h3>
     </ion-row>
   </ion-grid>
 
-  <ion-grid
-    style="height: 50%;padding-top: 10%;width:40%;"
-    *ngIf="result.length == 2"
-  >
+  <ion-grid style="height: 50%;padding-top: 10%;width:40%;" *ngIf="result.length == 2">
     <ion-row justify-content-center align-items-center style="float: right">
       <ion-col></ion-col>
       <ion-col>
-        <h3 style="font-size: 80px;">{{number1}}</h3>
+        <h3 style="font-size: 80px;"> {{number1}} </h3>
       </ion-col>
     </ion-row>
     <ion-row justify-content-center align-items-center style="float: right">
       <ion-col>
-        <h3 style="font-size: 80px;">{{operation}}</h3>
+        <h3 style="font-size: 80px;"> {{operation}} </h3>
       </ion-col>
       <ion-col>
-        <h3 style="font-size: 80px;">{{number2}}</h3>
+        <h3 style="font-size: 80px;"> {{number2}} </h3>
       </ion-col>
     </ion-row>
     <ion-row style="float: right">
       <div class="horizontal-black-line"></div>
     </ion-row>
-    <ion-row
-      *ngIf="showAnswer"
-      justify-content-center
-      align-items-center
-      style="float: right"
-    >
+    <ion-row *ngIf="showAnswer" justify-content-center align-items-center style="float: right">
       <ion-col></ion-col>
       <ion-col>
-        <h3 style="font-size: 80px;">{{getAnswer(wordDataObject.wordText)}}</h3>
+        <h3 style="font-size: 80px;"> {{getAnswer(wordDataObject.wordText)}} </h3>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -50,31 +42,29 @@
   <ion-grid style="padding-top: 40%;">
     <ion-row justify-content-center align-items-center style="height: 100%">
       <ion-col class="center-col-item" style="max-width: 30%;">
-        <div class="img-circular-green" (click)="greenCircleClick()"></div>
+        <div class="img-circular-green" (click)="greenCircleClick()">
+          <div class="horizontal-line"></div>
+        </div>
       </ion-col>
       <ion-col class="center-col-item" style="max-width: 30%;">
-        <div class="img-circular-red" (click)="redCircleClick()"></div>
+        <div class="img-circular-red" (click)="redCircleClick()">
+          <div class="verticle-line"></div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-grid style="height: 10%;padding-top: 10%;">
     <ion-row justify-content-center align-items-right style="height: 100%">
-      <ion-icon
-        name="volume-up"
-        style="height: 20%;top: 20%;right: 20%;position: absolute;font-size: xx-large;"
-        (click)="textToSpeechWordData(wordDataObject.wordText)"
-      ></ion-icon>
+      <ion-icon name="volume-up" style="height: 20%;top: 20%;right: 20%;position: absolute;font-size: xx-large;"
+        (click)="textToSpeechWordData(wordDataObject.wordText)"></ion-icon>
     </ion-row>
   </ion-grid>
 
   <ion-grid style="height: 10%;padding-top: 10%;" *ngIf="wordType == 1">
     <ion-row justify-content-center align-items-right style="height: 100%">
-      <ion-icon
-        name="sync"
-        style="height: 20%;top: 20%;left: 20%;position: absolute;font-size: xx-large;"
-        (click)="flipCard()"
-      ></ion-icon>
+      <ion-icon name="sync" style="height: 20%;top: 20%;left: 20%;position: absolute;font-size: xx-large;"
+        (click)="flipCard()"></ion-icon>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -25683,6 +25683,11 @@ ion-navbar.toolbar {
   height: auto;
 }
 
+.margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .img-circular-blue {
   width: 180px;
   height: 180px;
@@ -25778,11 +25783,6 @@ page-addWordList .update-profile-modal .modal-wrapper {
   position: relative !important;
   top: 15px !important;
   margin: 0 auto !important;
-}
-
-.error-message {
-  font-size: x-small;
-  color: red;
 }
 
 .passwordIcon {
